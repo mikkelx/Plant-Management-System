@@ -17,10 +17,12 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests(authorization -> authorization
-                        .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/plant").hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers("/api/personalizedplant/all").hasAuthority("ADMIN")
-                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/**").permitAll()
+//                        .requestMatchers("/auth/**").permitAll()
+//                        .requestMatchers("/swagger-ui/**").permitAll()
+//                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
+//                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
+//                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest()
                         .authenticated()
                 )

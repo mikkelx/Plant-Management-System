@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(path = "api/plant")
+@RequestMapping(path = "/plant")
 @RequiredArgsConstructor
 public class PlantController {
     private final PlantService plantService;

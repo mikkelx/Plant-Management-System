@@ -45,7 +45,7 @@ public class SignService {
         String token = generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Please Activate your Account", user.getEmail(),
                 "Thanks for signing up for PMS, click on the link to activate your account:" +
-                        "http://localhost:8100/api/auth/accountVerification/" + token));
+                        "http://localhost:8100/auth/accountVerification/" + token));
     }
 
     private String generateVerificationToken(User user) {
