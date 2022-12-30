@@ -3,6 +3,7 @@ package com.example.pms.security;
 
 import com.example.pms.user.User;
 import com.example.pms.user.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,6 +19,7 @@ public class DBUserDetailsServiceImpl implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //        Optional<User> optional = repository.findByUsername(username);
 //        if (optional.isEmpty()){

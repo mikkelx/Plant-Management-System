@@ -24,7 +24,7 @@ public class PersonalizedPlant {
     private LocalDate lastFertilizing;
     private LocalDate lastPotReplacement;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     @ManyToOne

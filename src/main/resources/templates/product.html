@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http:/>/www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Product - Brand</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}" />
+</head>
+
+<body>
+    <section class="py-5">
+        <div class="container">
+            <div class="table-responsive">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th >ID</th>
+                            <th>Name</th>
+                            <th>Watering TImestamp</th>
+                            <th>Soil</th>
+                            <th>Fertilizer</th>
+                            <th>Pot</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr th:each="tempPlantDto : ${plantsDtos}">
+                            <td th:text="${tempPlantDto.Id}" />
+                            <td th:text="${tempPlantDto.plantName}" />
+                            <td th:text="${tempPlantDto.wateringTimestampInDays}" />
+                            <td th:text="${tempPlantDto.soil}" />
+                            <td th:text="${tempPlantDto.fertilizer}" />
+                            <td th:text="${tempPlantDto.pot}" />
+                        </tr>
+                        <tr></tr>
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+    </section>
+    <footer class="bg-dark"></footer>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/script.min.js"></script>
+</body>
+
+</html>

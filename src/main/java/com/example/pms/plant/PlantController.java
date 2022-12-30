@@ -4,11 +4,13 @@ import com.example.pms.dto.PlantDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping(path = "/plant")
 @RequiredArgsConstructor
 public class PlantController {
@@ -28,6 +30,13 @@ public class PlantController {
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(plantService.getAll());
+    }
+
+    @GetMapping("/th")
+    public String getAllth(Model theModel) throws Exception{
+        List<PlantDto> plantDtoList = plantService.getAll();
+        theModel.addAttribute("plantsDtos", plantDtoList);
+        return "product";
     }
 
     //TODO - add access only for admin
