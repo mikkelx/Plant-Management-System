@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.util.Date;
 
 @Getter
 @Setter
@@ -13,8 +14,8 @@ import java.time.LocalDate;
 public class PersonalizedPlantDto {
     private Long Id;
     private String userLabel;
-    private LocalDate lastWatering;
-    private LocalDate lastFertilizing;
-    private LocalDate lastPotReplacement;
+    private Date lastWatering;
+    private Date lastFertilizing;
+    private Date lastPotReplacement;
     private Plant plant;
 }

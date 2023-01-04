@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 
 import org.jetbrains.annotations.NotNull;
 import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table
@@ -20,9 +21,9 @@ public class PersonalizedPlant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personalizedPlantId;
     private String userLabel;
-    private LocalDate lastWatering;
-    private LocalDate lastFertilizing;
-    private LocalDate lastPotReplacement;
+    private Date lastWatering;
+    private Date lastFertilizing;
+    private Date lastPotReplacement;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -38,8 +39,8 @@ public class PersonalizedPlant {
 //        this.lastWatering = lastWatering;
 //    }
 
-    public PersonalizedPlant(User user, Plant plant, String userLabel, LocalDate lastWatering,
-                             LocalDate lastFertilizing, LocalDate lastPotReplacement) {
+    public PersonalizedPlant(User user, Plant plant, String userLabel, Date lastWatering,
+                             Date lastFertilizing, Date lastPotReplacement) {
         this.userLabel = userLabel;
         this.lastWatering = lastWatering;
         this.lastFertilizing = lastFertilizing;
@@ -52,9 +53,9 @@ public class PersonalizedPlant {
         this.user = user;
         this.plant = plant;
         this.userLabel = userLabel;
-        this.lastWatering = LocalDate.now();
-        this.lastFertilizing = LocalDate.now();
-        this.lastPotReplacement = LocalDate.now();
+        this.lastWatering = new Date();
+        this.lastFertilizing = new Date();
+        this.lastPotReplacement = new Date();
     }
 
     public User getUser() {
@@ -64,6 +65,11 @@ public class PersonalizedPlant {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getPlantName() {
+        return this.plant.getPlantName();
+    }
+
 
     @Override
     public String toString() {

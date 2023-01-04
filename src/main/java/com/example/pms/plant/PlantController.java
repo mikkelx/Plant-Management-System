@@ -24,20 +24,29 @@ public class PlantController {
 //                .body(plantService.getAll());
 //    }
 
-    @GetMapping
-    public ResponseEntity<List<PlantDto>> getAll() throws Exception{
-        ResponseEntity<List<PlantDto>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
+    @GetMapping("/classic")
+    public ResponseEntity<List<Plant>> getAll() throws Exception{
+        ResponseEntity<List<Plant>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(plantService.getAll());
     }
 
-    @GetMapping("/th")
-    public String getAllth(Model theModel) throws Exception{
-        List<PlantDto> plantDtoList = plantService.getAll();
-        theModel.addAttribute("plantsDtos", plantDtoList);
-        return "product";
+    @GetMapping("/dto")
+    public ResponseEntity<List<PlantDto>> getAllDto() throws Exception{
+        ResponseEntity<List<PlantDto>> r = new ResponseEntity<>(plantService.getAllDto(), HttpStatus.OK);
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(plantService.getAllDto());
     }
+
+    @GetMapping
+    public String getAll(Model model) throws Exception{
+        List<Plant> plantsList = plantService.getAll();
+        model.addAttribute("allPlantsList", plantsList);
+        return "plants";
+    }
+
 
     //TODO - add access only for admin
     @PostMapping("/addNewPlant")
