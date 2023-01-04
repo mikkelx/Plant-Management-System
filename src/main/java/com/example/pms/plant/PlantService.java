@@ -13,11 +13,15 @@ public class PlantService {
 
     private final PlantRepository plantRepository;
 
-    public List<PlantDto> getAll() {
+    public List<PlantDto> getAllDto() {
         return plantRepository.findAll()
                 .stream()
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
+    }
+
+    public List<Plant> getAll() {
+        return plantRepository.findAll();
     }
 
     public List<Plant> getPlants() {

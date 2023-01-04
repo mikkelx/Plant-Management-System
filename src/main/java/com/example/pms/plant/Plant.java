@@ -55,6 +55,7 @@ public class Plant {
         return "Gatunek: " + this.plantName;// + " " + soilType.toString();
     }
 
-
-
+    public String getPlantName() {
+        return plantName;
+    }
 }

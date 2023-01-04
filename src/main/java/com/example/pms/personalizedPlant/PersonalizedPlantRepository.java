@@ -8,5 +8,5 @@ import java.util.Optional;
 public interface PersonalizedPlantRepository extends JpaRepository<PersonalizedPlant, Long> {
 
     Optional<List<PersonalizedPlant>> findByUserUserId(Long userId);
-    Optional<List<PersonalizedPlant>> findByPlantPlantId(Long plantId);
+    Optional<PersonalizedPlant> findByPlantPlantId(Long plantId);
 }

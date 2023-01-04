@@ -34,6 +34,19 @@ public class HomeService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public List<PersonalizedPlant> getYours2() throws PlantNotFoundException {
+        User user = this.getCurrentUser();
+        Long userId = user.getUserId();
+        //List<PersonalizedPlant> list = personalizedPlantRepository.findAll();//.orElseThrow(() -> new PlantNotFoundException("Cannot find any plant!"));
+        return personalizedPlantRepository.findByUserUserId(userId).orElseThrow(() -> new PlantNotFoundException("Cannot find any plant!"));
+    }
+
+    @Transactional
+    public PersonalizedPlant getPlantById(Long Id) throws PlantNotFoundException {
+        return personalizedPlantRepository.findByPlantPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Cannot find plant by id: " + Id));
+    }
+
     private User getCurrentUser(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String username = (String) auth.getPrincipal();

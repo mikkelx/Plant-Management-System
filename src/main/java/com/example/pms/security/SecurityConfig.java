@@ -24,10 +24,10 @@ public class SecurityConfig {
         };
 
         http.authorizeRequests(authorization -> authorization
-                        .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
-                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
-                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
+//                        .requestMatchers("/auth/**").permitAll()
+//                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
+//                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
+//                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
                         .anyRequest()
                         .authenticated()
                 )
