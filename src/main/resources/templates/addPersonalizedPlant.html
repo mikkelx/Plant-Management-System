@@ -5,8 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>FAQ - Brand</title>
-    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="../../../../../../Desktop/strona/export/assets/bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
 
@@ -15,51 +14,27 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-
-                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
-
-                </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
+                    <li class="nav-item"><a class="nav-link" href="../../../../../../Desktop/strona/export/index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="../../../../../../Desktop/strona/export/plants.html">Plants</a></li>
+                </ul><a class="btn btn-primary shadow" role="button" href="../../../../../../Desktop/strona/export/signup.html">Sign up</a>
             </div>
         </div>
     </nav>
     <section class="py-5 my-5">
-        <div class="container py-5">
-
-            <div class="row" style="text-align: center">
-                <div class="col">
-                    <button class="btn btn-primary" type="button">Add new plant</button>
-                </div>
-            </div>
-            <br/><br/>
-            <div class="table-responsive" style="text-align: center;">
+        <div class="container" style="text-align: center;width: 665px;">
+            <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th style="text-align: center;">Your Label</th>
-                            <th style="text-align: center;">Plant Type</th>
-                            <th style="text-align: center;">Last Watering</th>
-                            <th style="text-align: center;"></th>
-                            <th style="text-align: center;"></th>
+                            <th>Column 2</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="yourPlant : ${yourPlantsList}">
-                            <td style="text-align: center;" th:text="${yourPlant.userLabel}">
-                            <td style="text-align: center;" th:text="${yourPlant.getPlantName()}">
-                            <td style="text-align: center;" th:text="${yourPlant.lastWatering}">
-
-                            <td style="text-align: center;" >
-                            <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">
-                                <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                    Details
-                                </button>
-                            </a>
-                            </td>
-
-                            <td style="text-align: center;">
-                                <div class="alert alert-success" role="alert" style="text-align: center;"><span><strong>Alert</strong> text.</span></div>
-                            </td>
+                        <tr>
+                            <td>Cell 1</td>
+                        </tr>
+                        <tr>
+                            <td>Cell 4</td>
                         </tr>
                     </tbody>
                 </table>
@@ -115,8 +90,8 @@
             </div>
         </div>
     </footer>
-    <script th:src="@{bootstrap/js/bootstrap.min.js}"></script>
-    <script th:src="@{assets/js/startup-modern.js}"></script>
+    <script src="../../../../../../Desktop/strona/export/assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="../../../../../../Desktop/strona/export/assets/js/startup-modern.js"></script>
 </body>
 
 </html>
