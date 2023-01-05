@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>FAQ - Brand</title>
-    <link rel="stylesheet" href="../../../../../../Desktop/strona/export/assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
 
@@ -14,8 +14,8 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="../../../../../../Desktop/strona/export/index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="../../../../../../Desktop/strona/export/plants.html">Plants</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
                 </ul><a class="btn btn-primary shadow" role="button" href="../../../../../../Desktop/strona/export/signup.html">Sign up</a>
             </div>
         </div>
@@ -23,21 +23,38 @@
     <section class="py-5 my-5">
         <div class="container" style="text-align: center;width: 665px;">
             <div class="table-responsive">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Column 2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Cell 1</td>
-                        </tr>
-                        <tr>
-                            <td>Cell 4</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <form th:action="@{/submitPersonalizedPlantForm}" th:object="${model}" method="post">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="dropDownList" >
+                                        <option value="0" >select option</option>
+                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant}"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+                            <tr>
+                                <td>Cell 4</td>
+                            <tr/>
+
+                            <tr>
+                                <td>
+                                        <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                            Submit
+                                        </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </section>
@@ -90,8 +107,8 @@
             </div>
         </div>
     </footer>
-    <script src="../../../../../../Desktop/strona/export/assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="../../../../../../Desktop/strona/export/assets/js/startup-modern.js"></script>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/startup-modern.js}"></script>
 </body>
 
 </html>

@@ -44,11 +44,19 @@ public class PersonalizedPlantController {
         return "personalizedPlant";
     }
 
-    @GetMapping(value = "/addNew")
+    @GetMapping(value = "/displayAddingForm")
     public String addNewPersonalizedPlant(Model model) {
         List<Plant> plants = plantRepository.findAll();
-        model.addAttribute("AllPlants", plants);
+        model.addAttribute("allPlants", plants);
         return "addPersonalizedPlant";
+    }
+
+    //submitting new plant
+    @PostMapping("/submitPersonalizedPlantForm")
+    public String submitPersonalizedPlantForm(PersonalizedPlantDto personalizedPlantDto) {
+        System.out.println(personalizedPlantDto.getUserLabel());
+
+        return "userhome";
     }
 
 //    @GetMapping
