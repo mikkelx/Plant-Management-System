@@ -19,7 +19,10 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
 
-                </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
+                </ul>
+                <form th:action="@{/logout}" method="post">
+                    <input  type="submit" value="Logout" class="btn btn-primary shadow" role="button">
+                </form>
             </div>
         </div>
     </nav>
