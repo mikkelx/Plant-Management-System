@@ -23,14 +23,17 @@ public class SignService {
     private final MailService mailService;
 
     @Transactional
-    public void signup(RegisterRequest registerRequest) {
+    public void signup(RegisterRequest registerRequest) throws IllegalStateException{
         boolean userExists = userRepository.findByEmail(registerRequest.getEmail()).isPresent();
         if(userExists) {
-            throw new IllegalStateException("Podany email:"+ registerRequest.getEmail() + " jest już zarejestrowany!");
+            throw new IllegalStateException("Email: "+ registerRequest.getEmail() + " is already registered!");
         }
         userExists = userRepository.findByUsername(registerRequest.getUsername()).isPresent();
         if(userExists) {
-            throw new IllegalStateException("Podana nazwa użytkownika:"+ registerRequest.getUsername() + " jest już zajęta!");
+            throw new IllegalStateException("Username: "+ registerRequest.getUsername() + " is already taken!");
+        }
+        if(!registerRequest.getPassword().equals(registerRequest.getPassword_repeat())) {
+            throw new IllegalStateException("Passwords are not matching!");
         }
 
         User user = new User();

@@ -24,14 +24,21 @@ public class SecurityConfig {
         };
 
         http.authorizeRequests(authorization -> authorization
-//                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
 //                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
 //                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
 //                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/bootstrap/**",
+                                "/css/**",
+                                "/img/**",
+                                "/js/**").permitAll()
                         .anyRequest()
                         .authenticated()
                 )
-                .formLogin(formLogin -> formLogin//.loginPage("/login")
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/auth/login")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/auth/login")
                         .permitAll()
 
                 )

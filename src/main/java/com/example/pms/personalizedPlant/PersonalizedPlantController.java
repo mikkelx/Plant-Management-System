@@ -2,6 +2,8 @@ package com.example.pms.personalizedPlant;
 
 import com.example.pms.dto.PersonalizedPlantDto;
 import com.example.pms.home.HomeService;
+import com.example.pms.plant.Plant;
+import com.example.pms.plant.PlantRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PersonalizedPlantController {
     private final PersonalizedPlantService personalizedPlantService;
+    private final PlantRepository plantRepository;
     private final HomeService homeService;
 
 
@@ -39,6 +42,21 @@ public class PersonalizedPlantController {
         PersonalizedPlant personalizedPlant = homeService.getPlantById(Id);
         model.addAttribute("personalizedPlant", personalizedPlant);
         return "personalizedPlant";
+    }
+
+    @GetMapping(value = "/displayAddingForm")
+    public String addNewPersonalizedPlant(Model model) {
+        List<Plant> plants = plantRepository.findAll();
+        model.addAttribute("allPlants", plants);
+        return "addPersonalizedPlant";
+    }
+
+    //submitting new plant
+    @PostMapping("/submitPersonalizedPlantForm")
+    public String submitPersonalizedPlantForm(PersonalizedPlantDto personalizedPlantDto) {
+        System.out.println(personalizedPlantDto.getUserLabel());
+
+        return "userhome";
     }
 
 //    @GetMapping

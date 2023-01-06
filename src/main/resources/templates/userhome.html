@@ -15,14 +15,28 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="plants.html">Plants</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
+
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
+
+                </ul>
+                <form th:action="@{/logout}" method="post">
+                    <input  type="submit" value="Logout" class="btn btn-primary shadow" role="button">
+                </form>
             </div>
         </div>
     </nav>
     <section class="py-5 my-5">
         <div class="container py-5">
+
+            <div class="row" style="text-align: center">
+                <div class="col">
+                    <a th:href="@{/personalizedplant/displayAddingForm}">
+                        <button class="btn btn-primary" type="button">Add new plant</button>
+                    </a>
+                </div>
+            </div>
+            <br/><br/>
             <div class="table-responsive" style="text-align: center;">
                 <table class="table">
                     <thead>

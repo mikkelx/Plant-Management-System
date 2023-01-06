@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Log in - Brand</title>
+    <title>Contacts - Brand</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
@@ -14,24 +14,91 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="plants.html">Plants</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/auth/signupGet}">Sign up</a>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link active" th:href="@{/plant}">Plants</a></li>
+                </ul><a class="btn btn-primary shadow" role="button" href="signup.html">Sign up</a>
             </div>
         </div>
     </nav>
-    <section class="py-4 py-md-5 my-5">
-        <div class="container py-md-5">
+    <section class="py-5 mt-5">
+        <div class="container py-5">
             <div class="row">
-                <div class="col-md-6 text-center"><img class="img-fluid w-100" th:src="@{/img/illustrations/login.svg}"></div>
-                <div class="col-md-5 col-xl-4 text-center text-md-start">
-                    <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Login</strong><br></span></h2>
-                    <form method="post">
-                        <div class="mb-3"><input class="shadow form-control" type="username" name="username" placeholder="Username"></div>
-                        <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="Password"></div>
-                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Log in</button></div>
-                        <p class="text-muted"><a th:href="@{/auth/forgottenPassword}">Forgot your password?</a></p>
-                    </form>
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="display-6 fw-bold mb-4">All plants</h2>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center">
+                <div class="col-md-6">
+                    <div>
+                        <div class="table-responsive" style="text-align: center;">
+
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody th:each="plant : ${allPlantsList}">
+                                        <tr>
+                                            <td style="text-align: center;">Plant ID</td>
+                                            <td style="text-align: center;" th:text="${plant.getPlantId()}"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Plant Name</td>
+                                            <td th:text="${plant.getPlantName()}"> </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Watering needed every</td>
+                                            <td th:text="|${plant.getWateringTimestampInDays()} days|"></td>
+                                        </tr>
+                                        <tr><td></td><td></td></tr>
+                                        <tr>
+                                            <td>Soil Type</td>
+                                            <td th:text="${plant.getSoilType().getSoilName()}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Exchange frequency</td>
+                                            <td th:text="|${plant.getSoilType().getFreqOfReplacementInDays()} days|"></td>
+                                        </tr>
+                                        <tr><td></td><td></td></tr>
+                                        <tr>
+                                            <td>Fertilizer Type</td>
+                                            <td th:text="${plant.getFertilizerType().getFertilizerName()}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Exchange frequency</td>
+                                            <td th:text="|${plant.getFertilizerType().getFrequencyInDays()} days|"></td>
+                                        </tr>
+                                        <tr><td></td><td></td></tr>
+                                        <tr>
+                                            <td>Flower Pot Size</td>
+                                            <td th:text="${plant.getFlowerPot().getPotSize()}"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Exchange frequency</td>
+                                            <td th:text="|${plant.getFlowerPot().getFreqOfReplacementInDays()} days|"></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td><br/></td>
+                                            <td><br/></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="py-4 py-xl-5 mb-5">
+        <div class="container">
+            <div class="row mb-2">
+                <div class="col-md-8 col-xl-6 text-center mx-auto">
+                    <h2 class="display-6 fw-bold mb-5"><span class="pb-3 underline">FAQ<br></span></h2>
+                    <p class="text-muted mb-5">Curae hendrerit donec commodo hendrerit egestas tempus, turpis facilisis nostra nunc. Vestibulum dui eget ultrices.</p>
                 </div>
             </div>
         </div>

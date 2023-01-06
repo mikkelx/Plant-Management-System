@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Log in - Brand</title>
+    <title>FAQ - Brand</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
@@ -14,25 +14,50 @@
         <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse" id="navcol-1">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="plants.html">Plants</a></li>
-                </ul><a class="btn btn-primary shadow" role="button" th:href="@{/auth/signupGet}">Sign up</a>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
+                </ul>
+                <form th:action="@{/logout}" method="post">
+                    <input  type="submit" value="Logout" class="btn btn-primary shadow" role="button">
+                </form>
             </div>
         </div>
     </nav>
-    <section class="py-4 py-md-5 my-5">
-        <div class="container py-md-5">
-            <div class="row">
-                <div class="col-md-6 text-center"><img class="img-fluid w-100" th:src="@{/img/illustrations/login.svg}"></div>
-                <div class="col-md-5 col-xl-4 text-center text-md-start">
-                    <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Login</strong><br></span></h2>
-                    <form method="post">
-                        <div class="mb-3"><input class="shadow form-control" type="username" name="username" placeholder="Username"></div>
-                        <div class="mb-3"><input class="shadow form-control" type="password" name="password" placeholder="Password"></div>
-                        <div class="mb-5"><button class="btn btn-primary shadow" type="submit">Log in</button></div>
-                        <p class="text-muted"><a th:href="@{/auth/forgottenPassword}">Forgot your password?</a></p>
-                    </form>
-                </div>
+    <section class="py-5 my-5">
+        <div class="container" style="text-align: center;width: 665px;">
+            <div class="table-responsive">
+                <form th:action="@{/submitPersonalizedPlantForm}" th:object="${model}" method="post">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="dropDownList" >
+                                        <option value="0" >select option</option>
+                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant}"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+                            <tr>
+                                <td>Cell 4</td>
+                            <tr/>
+
+                            <tr>
+                                <td>
+                                        <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                            Submit
+                                        </button>
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </section>
