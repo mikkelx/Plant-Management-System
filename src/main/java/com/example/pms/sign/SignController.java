@@ -31,19 +31,6 @@ public class SignController {
         return "signup";
     }
 
-    //TODO - rename mapping
-//    @PostMapping("/signup")
-//    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
-//        signService.signup(registerRequest);
-//        return new ResponseEntity<>("User registartion successfull - activation link sent to your email!", HttpStatus.OK);
-//    }
-
-    @GetMapping("/accountVerification/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
-        signService.verifyAccount(token);
-        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
-    }
-
     @PostMapping("/signup")
     public String signup(Model model, @ModelAttribute("registerRequest") RegisterRequest registerRequest){
         //model.addAttribute("registerRequest", registerRequest);
@@ -57,6 +44,21 @@ public class SignController {
 
         return "redirect:/login";
     }
+
+    //TODO - rename mapping
+//    @PostMapping("/signup")
+//    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
+//        signService.signup(registerRequest);
+//        return new ResponseEntity<>("User registartion successfull - activation link sent to your email!", HttpStatus.OK);
+//    }
+
+    @GetMapping("/accountVerification/{token}")
+    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+        signService.verifyAccount(token);
+        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
+    }
+
+
 
 
 

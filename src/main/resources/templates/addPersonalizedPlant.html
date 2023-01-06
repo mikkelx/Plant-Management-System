@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -26,7 +28,7 @@
     <section class="py-5 my-5">
         <div class="container" style="text-align: center;width: 665px;">
             <div class="table-responsive">
-                <form th:action="@{/submitPersonalizedPlantForm}" th:object="${model}" method="post">
+                <form th:action="@{/personalizedplant/submitNew}" th:object="${registerPersonalizedPlant}" method="post" role="form">
                     <table class="table">
                         <thead>
                             <tr>
@@ -36,22 +38,61 @@
                         <tbody>
                             <tr>
                                 <td>
-                                    <select style="text-align: center" class="form-control" id="dropDownList" >
+                                    <select style="text-align: center" class="form-control" id="plantsdropDownList" th:field="*{plantName}">
                                         <option value="0" >select option</option>
-                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant}"></option>
+                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant.plantName}" ></option>
                                     </select>
                                 </td>
                             <tr/>
 
                             <tr>
-                                <td>Cell 4</td>
+                                <td>
+<!--                                    <div class="mb-3"><input class="shadow-sm form-control" type="text" name="email" placeholder="Email" th:field="*{email}"></div>-->
+                                    <input style="text-align: center" class="shadow-sm form-control" type="text" name="userLabel" placeholder="Your Label" th:field="*{userLabel}">
+                                </td>
                             <tr/>
 
                             <tr>
                                 <td>
-                                        <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                            Submit
-                                        </button>
+                                    <select style="text-align: center" class="form-control" id="wateringdaysdropDownList" th:field="*{lastWatering}">
+                                        <option value="0" >How long ago was last watering?</option>
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="fertilizingdaysdropDownList" th:field="*{lastFertilizing}">
+                                        <option value="0" >How long ago was last fertilizing?</option>
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="potdaysdropDownList" th:field="*{lastPotReplacement}">
+                                        <option value="0" >How long ago was last fertilizing?</option>
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+<!--                            <tr>-->
+<!--                                <td>-->
+<!--                                    <div>-->
+<!--                                        <label for="lastWatering">Last Watering:</label>-->
+<!--                                        <input type="date"  name="lastWatering"/>-->
+<!--&lt;!&ndash;                                        <label for="student-birth-date">Date of birth:</label>&ndash;&gt;-->
+<!--&lt;!&ndash;                                        <input type="date" th:field="${student.birthDate}" id="student-birth-date"/>&ndash;&gt;-->
+<!--                                    </div>-->
+<!--                                </td>-->
+<!--                            </tr>-->
+
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary shadow" type="submit">Submit</button>
                                 </td>
                             </tr>
 

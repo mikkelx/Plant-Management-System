@@ -14,8 +14,8 @@ import java.util.Date;
 public class PersonalizedPlantDto {
     private Long Id;
     private String userLabel;
-    private Date lastWatering;
-    private Date lastFertilizing;
-    private Date lastPotReplacement;
+    private LocalDate lastWatering;
+    private LocalDate lastFertilizing;
+    private LocalDate lastPotReplacement;
     private Plant plant;
 }

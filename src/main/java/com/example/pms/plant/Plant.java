@@ -52,7 +52,7 @@ public class Plant {
 
     @Override
     public String toString() {
-        return "Gatunek: " + this.plantName;// + " " + soilType.toString();
+        return this.plantName;// + " " + soilType.toString();
     }
 
     public String getPlantName() {

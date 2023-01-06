@@ -26,6 +26,12 @@ public class UserLog {
     @ManyToOne(fetch = FetchType.LAZY)
     private User user;
 
+    public UserLog(String logData, User user) {
+        this.logData = logData;
+        this.date = LocalDate.now();
+        this.user = user;
+    }
+
     public UserLog(String logData) {
         this.logData = logData;
         this.date = LocalDate.now();

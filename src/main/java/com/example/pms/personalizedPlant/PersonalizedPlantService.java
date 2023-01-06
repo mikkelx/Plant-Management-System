@@ -1,6 +1,7 @@
 package com.example.pms.personalizedPlant;
 
 import com.example.pms.dto.PersonalizedPlantDto;
+import com.example.pms.dto.RegisterPersonalizedPlant;
 import com.example.pms.exceptions.PlantNotFoundException;
 import com.example.pms.plant.PlantRepository;
 import com.example.pms.user.User;
@@ -8,6 +9,9 @@ import com.example.pms.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,7 +23,23 @@ public class PersonalizedPlantService {
     private final PlantRepository plantRepository;
 
     @Transactional
-    public PersonalizedPlantDto save(PersonalizedPlantDto personalizedPlantDto) {
+    public void save(RegisterPersonalizedPlant registerPersonalizedPlant) throws PlantNotFoundException {
+        PersonalizedPlant save = new PersonalizedPlant();
+        User user = userService.getCurrentUser();
+        save.setUser(user);
+        save.setUserLabel(registerPersonalizedPlant.getUserLabel());
+        save.setLastWatering(LocalDate.now().minusDays(registerPersonalizedPlant.getLastWatering()));
+        save.setLastWatering(LocalDate.now().minusDays(registerPersonalizedPlant.getLastFertilizing()));
+        save.setLastPotReplacement(LocalDate.now().minusDays(registerPersonalizedPlant.getLastPotReplacement()));
+        save.setPlant(plantRepository.findByPlantName(registerPersonalizedPlant.getPlantName())
+                .orElseThrow(() -> new PlantNotFoundException("Plant not found in db!")));
+
+        userService.createLog("Added new plant: " + registerPersonalizedPlant.getPlantName(), user);
+        personalizedPlantRepository.save(save);
+    }
+
+    @Transactional
+    public PersonalizedPlantDto saveDto(PersonalizedPlantDto personalizedPlantDto) {
        PersonalizedPlant save = personalizedPlantRepository.save(mapPersonalizedPlantDto(personalizedPlantDto));
        personalizedPlantDto.setId(save.getPersonalizedPlantId());
        return personalizedPlantDto;
