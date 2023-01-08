@@ -36,4 +36,8 @@ public class VerificationToken {
     public User getUser() {
         return user;
     }
+
+    public String getToken() {
+        return token;
+    }
 }

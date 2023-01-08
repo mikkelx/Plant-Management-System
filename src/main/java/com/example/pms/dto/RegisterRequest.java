@@ -13,6 +13,8 @@ public class RegisterRequest {
     private String password;
     private String password_repeat;
 
+    private String token;
+
     public String getEmail() {
         return email;
     }

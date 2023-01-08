@@ -1,6 +1,7 @@
 package com.example.pms.sign;
 
 import com.example.pms.dto.RegisterRequest;
+import com.example.pms.exceptions.ActivationException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +21,57 @@ public class SignController {
     }
 
     @GetMapping("/forgottenPassword")
-    public String forgottenPassword() {
+    public String forgottenPassword(Model model) {
+        RegisterRequest registerRequest = new RegisterRequest();
+
+        model.addAttribute("registerRequest", registerRequest);
         return "forgotten-password";
+    }
+
+    @PostMapping("/sendMailToReset")
+    public String passwordResetSendMail(Model model,
+                                    @ModelAttribute("registerRequest") RegisterRequest emailRequest){
+        try {
+            signService.sendResetEmail(emailRequest.getEmail());
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+
+            return "error";
+        }
+        model.addAttribute("exceptionMessage", "Reset password link was sent to your email!");
+        return "error";
+    }
+
+    @GetMapping("/passwordReset/{token}")
+    public String passwordResetGet(@PathVariable String token, Model model) {
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setToken(token);
+
+        try {
+            signService.verifyAccount(token);
+        } catch (ActivationException exception) {
+            model.addAttribute("exceptionMessage", "Password reset error");
+        }
+
+        model.addAttribute("registerRequest", registerRequest);
+//        model.addAttribute("stringToken", token);
+        return "forgotten-password_submit";
+    }
+
+    @PostMapping("/passwordReset/{token}")
+    public String passwordResetPost(Model model,
+                         @ModelAttribute("registerRequest") RegisterRequest registerRequest, @PathVariable String token) {
+        try {
+            signService.changePassword(registerRequest.getPassword(), registerRequest.getPassword_repeat(), registerRequest.getToken());
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+
+            return "error";
+        }
+
+        return "redirect:/login";
     }
 
     @GetMapping("/signupGet")
@@ -45,6 +95,20 @@ public class SignController {
         return "redirect:/login";
     }
 
+    @GetMapping("/accountVerification/{token}")
+    public String verifyAccount(@PathVariable String token, Model model) {
+        try {
+            signService.verifyAccount(token);
+        } catch (ActivationException exception) {
+            model.addAttribute("exceptionMessage", "Account activation error");
+        }
+        model.addAttribute("exceptionMessage", "Account activated successfully");
+        return "error";
+    }
+
+
+
+
     //TODO - rename mapping
 //    @PostMapping("/signup")
 //    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
@@ -52,11 +116,11 @@ public class SignController {
 //        return new ResponseEntity<>("User registartion successfull - activation link sent to your email!", HttpStatus.OK);
 //    }
 
-    @GetMapping("/accountVerification/{token}")
-    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
-        signService.verifyAccount(token);
-        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
-    }
+//    @GetMapping("/accountVerification/{token}")
+//    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
+//        signService.verifyAccount(token);
+//        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
+//    }
 
 
 
