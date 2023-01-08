@@ -59,6 +59,7 @@ public class SignController {
         return "forgotten-password_submit";
     }
 
+    
     @PostMapping("/passwordReset/{token}")
     public String passwordResetPost(Model model,
                          @ModelAttribute("registerRequest") RegisterRequest registerRequest, @PathVariable String token) {
