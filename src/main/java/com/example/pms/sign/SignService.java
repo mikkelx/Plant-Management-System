@@ -74,4 +74,25 @@ public class SignService {
         user.setEnabled(true);
         userRepository.save(user);
     }
+
+    public void sendResetEmail(String email) {
+        User user = userRepository.findByEmail(email).orElseThrow(() -> new ActivationException("Email is wrong!"));
+        VerificationToken verificationToken = verificationTokenRepository.findByUserUserId(user.getUserId()).orElseThrow(() -> new ActivationException("Email is wrong!"));
+
+        mailService.sendMail(new NotificationEmail("Password reset", user.getEmail(),
+                "THere is your link to reset password, click on the link to change:" +
+                        "http://localhost:8100/auth/passwordReset/" + verificationToken.getToken()));
+    }
+
+    public void changePassword(String newPassword, String newPasswordRepeat, String token) throws ActivationException{
+        if(newPassword.equals(newPasswordRepeat)) {
+            Optional<VerificationToken> verificationToken = verificationTokenRepository.findByToken(token);
+            verificationToken.orElseThrow(() -> new ActivationException("Invalid Token"));
+            User user = verificationToken.get().getUser();
+            user.setPassword(passwordEncoder.encode(newPassword));
+            userRepository.save(user);
+            return;
+        }
+        throw new ActivationException("Passwords are not matching!");
+    }
 }

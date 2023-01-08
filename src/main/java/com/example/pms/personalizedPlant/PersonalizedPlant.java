@@ -6,6 +6,8 @@ import lombok.*;
 import jakarta.persistence.*;
 
 import org.jetbrains.annotations.NotNull;
+import org.springframework.cglib.core.Local;
+
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -21,9 +23,9 @@ public class PersonalizedPlant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long personalizedPlantId;
     private String userLabel;
-    private Date lastWatering;
-    private Date lastFertilizing;
-    private Date lastPotReplacement;
+    private LocalDate lastWatering;
+    private LocalDate lastFertilizing;
+    private LocalDate lastPotReplacement;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -39,8 +41,8 @@ public class PersonalizedPlant {
 //        this.lastWatering = lastWatering;
 //    }
 
-    public PersonalizedPlant(User user, Plant plant, String userLabel, Date lastWatering,
-                             Date lastFertilizing, Date lastPotReplacement) {
+    public PersonalizedPlant(User user, Plant plant, String userLabel, LocalDate lastWatering,
+                             LocalDate lastFertilizing, LocalDate lastPotReplacement) {
         this.userLabel = userLabel;
         this.lastWatering = lastWatering;
         this.lastFertilizing = lastFertilizing;
@@ -53,9 +55,9 @@ public class PersonalizedPlant {
         this.user = user;
         this.plant = plant;
         this.userLabel = userLabel;
-        this.lastWatering = new Date();
-        this.lastFertilizing = new Date();
-        this.lastPotReplacement = new Date();
+        this.lastWatering = LocalDate.now();
+        this.lastFertilizing = LocalDate.now();
+        this.lastPotReplacement = LocalDate.now();
     }
 
     public User getUser() {

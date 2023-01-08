@@ -32,6 +32,7 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/img/**",
                                 "/js/**").permitAll()
+                                .requestMatchers("/personalizedplant/displayAddingForm").permitAll()
                         .anyRequest()
                         .authenticated()
                 )
