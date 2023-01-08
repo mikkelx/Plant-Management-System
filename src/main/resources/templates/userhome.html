@@ -64,9 +64,7 @@
                             </a>
                             </td>
 
-                            <td style="text-align: center;" th:if="${yourPlant.message != ''}">
-<!--                                <div class="alert alert-success" role="alert" style="text-align: center;" ><span><strong>Alert</strong> text.</span></div>-->
-                                <div class="alert alert-success" style="text-align: center;" th:text="${yourPlant.message}"></div>
+                            <td style="text-align: center;" th:text="${yourPlant.message}">
                             </td>
                         </tr>
                     </tbody>

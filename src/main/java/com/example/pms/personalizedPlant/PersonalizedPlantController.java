@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -59,6 +60,46 @@ public class PersonalizedPlantController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/water")
+    public String water(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.waterPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/fertilizer")
+    public String fertilizer(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.fertilizerPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/pot")
+    public String pot(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.potPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
 
     //    @GetMapping
 //    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{

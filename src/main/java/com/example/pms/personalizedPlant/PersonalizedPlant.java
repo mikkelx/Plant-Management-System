@@ -28,6 +28,9 @@ public class PersonalizedPlant {
     private LocalDate lastFertilizing;
     private LocalDate lastPotReplacement;
     private String message;
+    private boolean wateringSent;
+    private boolean fertilizerSent;
+    private boolean potSent;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -52,6 +55,10 @@ public class PersonalizedPlant {
         this.plant = plant;
         this.lastPotReplacement = lastPotReplacement;
         this.message = "";
+        this.wateringSent = false;
+        this.fertilizerSent = false;
+        this.potSent = false;
+
     }
 
     public PersonalizedPlant(User user, Plant plant, String userLabel) {
@@ -62,6 +69,9 @@ public class PersonalizedPlant {
         this.lastFertilizing = LocalDate.now();
         this.lastPotReplacement = LocalDate.now();
         this.message = "";
+        this.wateringSent = false;
+        this.fertilizerSent = false;
+        this.potSent = false;
     }
 
     public User getUser() {
@@ -79,22 +89,61 @@ public class PersonalizedPlant {
     public String checkActions() {
         LocalDate now = LocalDate.now();
 
-        Long wateringTime = ChronoUnit.DAYS.between(now, this.lastWatering);
-        if(plant.getWateringTimestampInDays() <= wateringTime) {
+        if(this.needWatering()) {
             this.message += "Water me! ";
         }
 
-        Long fertilizingTime = ChronoUnit.DAYS.between(now, this.lastFertilizing);
-        if(plant.getFertilizerType().getFrequencyInDays() <= fertilizingTime) {
-            this.message += "Fertilizer me! ";
+        if(this.needFertilizing()) {
+            this.message += "Fertilize me! ";
         }
 
-        Long potTime = ChronoUnit.DAYS.between(now, this.lastPotReplacement);
-        if(plant.getFlowerPot().getFreqOfReplacementInDays() <= potTime) {
+        if(this.needPotReplacement()) {
             this.message += "Replace my pot! ";
         }
 
         return this.message;
+    }
+
+    public boolean needWatering() {
+        LocalDate now = LocalDate.now();
+
+        Long wateringTime = ChronoUnit.DAYS.between(this.lastWatering, now);
+        if(plant.getWateringTimestampInDays() <= wateringTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needFertilizing() {
+        LocalDate now = LocalDate.now();
+
+        Long fertilizingTime = ChronoUnit.DAYS.between(this.lastFertilizing, now);
+        if(plant.getFertilizerType().getFrequencyInDays() <= fertilizingTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needPotReplacement() {
+        LocalDate now = LocalDate.now();
+
+        Long potTime = ChronoUnit.DAYS.between(this.lastPotReplacement, now);
+        if(plant.getFlowerPot().getFreqOfReplacementInDays() <= potTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean isWateringSent() {
+        return wateringSent;
+    }
+
+    public boolean isFertilizerSent() {
+        return fertilizerSent;
+    }
+
+    public boolean isPotSent() {
+        return potSent;
     }
 
     @Override

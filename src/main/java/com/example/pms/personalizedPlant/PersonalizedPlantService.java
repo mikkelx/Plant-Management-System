@@ -1,9 +1,13 @@
 package com.example.pms.personalizedPlant;
 
+import com.example.pms.dto.NotificationEmail;
 import com.example.pms.dto.PersonalizedPlantDto;
 import com.example.pms.dto.RegisterPersonalizedPlant;
+import com.example.pms.exceptions.ActivationException;
 import com.example.pms.exceptions.PlantNotFoundException;
 import com.example.pms.plant.PlantRepository;
+import com.example.pms.sign.MailService;
+import com.example.pms.sign.VerificationToken;
 import com.example.pms.user.User;
 import com.example.pms.user.UserService;
 import jakarta.transaction.Transactional;
@@ -50,6 +54,34 @@ public class PersonalizedPlantService {
                 .map(this::mapToDto)
                 .collect(Collectors.toList());
     }
+
+    public void waterPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastWatering(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Water me!", ""));
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void fertilizerPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastFertilizing(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Fertilize me! ", ""));
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void potPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastPotReplacement(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Replace my pot! ", ""));
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
 
     @Transactional
     public PersonalizedPlantDto saveDto(PersonalizedPlantDto personalizedPlantDto) {

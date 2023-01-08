@@ -25,6 +25,7 @@ public class SecurityConfig {
 
         http.authorizeRequests(authorization -> authorization
                         .requestMatchers("/auth/**").permitAll()
+                                .requestMatchers("/personalizedplant/**").hasAnyAuthority("USER", "ADMIN")
 //                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
 //                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
 //                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
@@ -32,7 +33,6 @@ public class SecurityConfig {
                                 "/css/**",
                                 "/img/**",
                                 "/js/**").permitAll()
-                                .requestMatchers("/personalizedplant/displayAddingForm").permitAll()
                         .anyRequest()
                         .authenticated()
                 )

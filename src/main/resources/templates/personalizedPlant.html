@@ -28,6 +28,21 @@
     <section class="py-5 mt-5">
         <div class="container py-4 py-xl-5" style="width: 477px;">
             <div class="table-responsive">
+                <table class="table" style="border-color: white">
+                    <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="text-align: center;" th:text="${personalizedPlant.message}">
+                    </tr>
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="table-responsive">
                 <table class="table">
 <!--                    <input type="hidden" th:field="*{}" />-->
                     <thead>
@@ -58,40 +73,64 @@
                             <td>Last Pot Replacement</td>
                             <td th:text="${personalizedPlant.getLastPotReplacement()}">
                         </tr>
+
                         <tr>
                             <td style="text-align: center;" >
                                 <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
-                                <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                    Water
-                                </button>
-                                <!--                                </a>-->
+                                <a th:href="@{/personalizedplant/water(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                        Water
+                                    </button>
+                                </a>
                             </td>
                             <td style="text-align: center;" >
-                                <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
-                                <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                    Fertilizer
-                                </button>
-                                <!--                                </a>-->
+                                <a th:href="@{/personalizedplant/fertilizer(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                        Fertilizer
+                                    </button>
+                                </a>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;" >
-<!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
+                                <a th:href="@{/personalizedplant/pot(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
                                     <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                        Update
+                                        Pot
                                     </button>
-<!--                                </a>-->
+                                </a>
                             </td>
                             <td style="text-align: center;" >
                                 <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
                                 <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                    Delete
+                                    Update
                                 </button>
                                 <!--                                </a>-->
                             </td>
                         </tr>
                     </tbody>
                 </table>
+            </div>
+            <div class="table-responsive">
+                <table class="table" style="border-color: white">
+                    <thead>
+                    <tr>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td style="text-align: center;" >
+
+                            <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
+                            <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                Delete
+                            </button>
+                            <!--                                </a>-->
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
             </div>
         </div>
     </section>

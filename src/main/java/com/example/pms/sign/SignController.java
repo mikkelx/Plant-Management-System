@@ -2,6 +2,7 @@ package com.example.pms.sign;
 
 import com.example.pms.dto.RegisterRequest;
 import com.example.pms.exceptions.ActivationException;
+import com.example.pms.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SignController {
     private final SignService signService;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String login() {
@@ -104,6 +106,7 @@ public class SignController {
     public String verifyAccount(@PathVariable String token, Model model) {
         try {
             signService.verifyAccount(token);
+            userService.createLog("User account confirmed");
         } catch (ActivationException exception) {
             model.addAttribute("exceptionMessage", "Account activation error");
         }

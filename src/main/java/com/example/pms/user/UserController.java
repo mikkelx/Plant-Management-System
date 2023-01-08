@@ -12,15 +12,17 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping
-    public List<User> getUsersList() {
-        return userService.getUsersList();
-    }
 
-    @PostMapping
-    public void addNewUserToDB(@RequestBody User user) {
-        userService.addNewUserToDB(user);
-    }
+
+//    @GetMapping
+//    public List<User> getUsersList() {
+//        return userService.getUsersList();
+//    }
+//
+//    @PostMapping
+//    public void addNewUserToDB(@RequestBody User user) {
+//        userService.addNewUserToDB(user);
+//    }
 
     //TODO
 //    @PostMapping("/passchange")
