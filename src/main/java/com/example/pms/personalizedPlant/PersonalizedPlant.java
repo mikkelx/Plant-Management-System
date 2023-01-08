@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @Entity
@@ -26,6 +27,7 @@ public class PersonalizedPlant {
     private LocalDate lastWatering;
     private LocalDate lastFertilizing;
     private LocalDate lastPotReplacement;
+    private String message;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -49,6 +51,7 @@ public class PersonalizedPlant {
         this.user = user;
         this.plant = plant;
         this.lastPotReplacement = lastPotReplacement;
+        this.message = "";
     }
 
     public PersonalizedPlant(User user, Plant plant, String userLabel) {
@@ -58,6 +61,7 @@ public class PersonalizedPlant {
         this.lastWatering = LocalDate.now();
         this.lastFertilizing = LocalDate.now();
         this.lastPotReplacement = LocalDate.now();
+        this.message = "";
     }
 
     public User getUser() {
@@ -72,6 +76,26 @@ public class PersonalizedPlant {
         return this.plant.getPlantName();
     }
 
+    public String checkActions() {
+        LocalDate now = LocalDate.now();
+
+        Long wateringTime = ChronoUnit.DAYS.between(now, this.lastWatering);
+        if(plant.getWateringTimestampInDays() <= wateringTime) {
+            this.message += "Water me! ";
+        }
+
+        Long fertilizingTime = ChronoUnit.DAYS.between(now, this.lastFertilizing);
+        if(plant.getFertilizerType().getFrequencyInDays() <= fertilizingTime) {
+            this.message += "Fertilizer me! ";
+        }
+
+        Long potTime = ChronoUnit.DAYS.between(now, this.lastPotReplacement);
+        if(plant.getFlowerPot().getFreqOfReplacementInDays() <= potTime) {
+            this.message += "Replace my pot! ";
+        }
+
+        return this.message;
+    }
 
     @Override
     public String toString() {

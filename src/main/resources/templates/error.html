@@ -19,7 +19,7 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/plants}">Plants</a></li>
                 </ul>
-                <a class="btn btn-primary shadow" role="button" th:href="@{/auth/signupGet}">Sign up</a>
+
             </div>
         </div>
     </nav>
@@ -28,6 +28,8 @@
             <div class="row row-cols-1 d-flex justify-content-center align-items-center">
                 <div class="col text-center" >
                     <td class="fs-4 text-muted" th:text="${exceptionMessage} ?: ''" />
+                    <br/><br/>
+                    <a class="btn btn-primary shadow" role="button" th:href="@{/}">Home</a>
 <!--                    <p class="fs-4 text-muted" th:text="${exceptionMessage}"/>-->
                 </div>
             </div>
@@ -39,6 +41,7 @@
                 <div class="col-12 col-md-3">
                     <div class="fw-bold d-flex align-items-center mb-2"><span>Brand</span></div>
                     <p class="text-muted">Sem eleifend donec molestie, integer quisque orci aliquam.</p>
+
                 </div>
                 <div class="col-sm-4 col-md-3 text-lg-start d-flex flex-column">
                     <h3 class="fs-6 fw-bold">Services</h3>

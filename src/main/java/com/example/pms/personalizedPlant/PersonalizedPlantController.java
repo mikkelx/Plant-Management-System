@@ -23,20 +23,6 @@ public class PersonalizedPlantController {
     private final HomeService homeService;
 
 
-//    @GetMapping
-//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(personalizedPlantService.getYours());
-//    }
-//
-
-//    @PostMapping
-//    public ResponseEntity<PersonalizedPlantDto> createPresonalizedPlant(@RequestBody PersonalizedPlantDto personalizedPlantDto) {
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(personalizedPlantService.saveDto(personalizedPlantDto));
-//    }
 
     @GetMapping("/getById")
     public String getPlantById(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
@@ -73,6 +59,22 @@ public class PersonalizedPlantController {
 
         return "redirect:/";
     }
+
+    //    @GetMapping
+//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(personalizedPlantService.getYours());
+//    }
+//
+
+//    @PostMapping
+//    public ResponseEntity<PersonalizedPlantDto> createPresonalizedPlant(@RequestBody PersonalizedPlantDto personalizedPlantDto) {
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(personalizedPlantService.saveDto(personalizedPlantDto));
+//    }
+
 
     //submitting new plant
 //    @PostMapping("/submitPersonalizedPlantForm")

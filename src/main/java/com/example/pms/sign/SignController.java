@@ -20,6 +20,7 @@ public class SignController {
         return "login";
     }
 
+    //reseting password
     @GetMapping("/forgottenPassword")
     public String forgottenPassword(Model model) {
         RegisterRequest registerRequest = new RegisterRequest();
@@ -55,11 +56,10 @@ public class SignController {
         }
 
         model.addAttribute("registerRequest", registerRequest);
-//        model.addAttribute("stringToken", token);
         return "forgotten-password_submit";
     }
 
-    
+
     @PostMapping("/passwordReset/{token}")
     public String passwordResetPost(Model model,
                          @ModelAttribute("registerRequest") RegisterRequest registerRequest, @PathVariable String token) {
@@ -74,6 +74,8 @@ public class SignController {
 
         return "redirect:/login";
     }
+
+    //register new user
 
     @GetMapping("/signupGet")
     public String signupGet(Model model) {
@@ -93,7 +95,9 @@ public class SignController {
             return "error";
         }
 
-        return "redirect:/login";
+        model.addAttribute("exceptionMessage", "Activation link was sent to your email!");
+        return "error";
+//        return "redirect:/login";
     }
 
     @GetMapping("/accountVerification/{token}")

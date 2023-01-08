@@ -29,7 +29,7 @@ public class PersonalizedPlantService {
         save.setUser(user);
         save.setUserLabel(registerPersonalizedPlant.getUserLabel());
         save.setLastWatering(LocalDate.now().minusDays(registerPersonalizedPlant.getLastWatering()));
-        save.setLastWatering(LocalDate.now().minusDays(registerPersonalizedPlant.getLastFertilizing()));
+        save.setLastFertilizing(LocalDate.now().minusDays(registerPersonalizedPlant.getLastFertilizing()));
         save.setLastPotReplacement(LocalDate.now().minusDays(registerPersonalizedPlant.getLastPotReplacement()));
         save.setPlant(plantRepository.findByPlantName(registerPersonalizedPlant.getPlantName())
                 .orElseThrow(() -> new PlantNotFoundException("Plant not found in db!")));
@@ -38,12 +38,6 @@ public class PersonalizedPlantService {
         personalizedPlantRepository.save(save);
     }
 
-    @Transactional
-    public PersonalizedPlantDto saveDto(PersonalizedPlantDto personalizedPlantDto) {
-       PersonalizedPlant save = personalizedPlantRepository.save(mapPersonalizedPlantDto(personalizedPlantDto));
-       personalizedPlantDto.setId(save.getPersonalizedPlantId());
-       return personalizedPlantDto;
-    }
 
 
     @Transactional
@@ -57,6 +51,12 @@ public class PersonalizedPlantService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
+    public PersonalizedPlantDto saveDto(PersonalizedPlantDto personalizedPlantDto) {
+        PersonalizedPlant save = personalizedPlantRepository.save(mapPersonalizedPlantDto(personalizedPlantDto));
+        personalizedPlantDto.setId(save.getPersonalizedPlantId());
+        return personalizedPlantDto;
+    }
 
 //    //TODO - to delete - user have access only to his plants
     @Transactional
