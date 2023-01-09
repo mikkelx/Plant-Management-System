@@ -9,4 +9,5 @@ public interface PersonalizedPlantRepository extends JpaRepository<PersonalizedP
 
     Optional<List<PersonalizedPlant>> findByUserUserId(Long userId);
     Optional<PersonalizedPlant> findByPlantPlantId(Long plantId);
+    Optional<PersonalizedPlant> findByPersonalizedPlantId(Long Id);
 }

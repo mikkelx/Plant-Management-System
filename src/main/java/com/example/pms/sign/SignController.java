@@ -2,6 +2,7 @@ package com.example.pms.sign;
 
 import com.example.pms.dto.RegisterRequest;
 import com.example.pms.exceptions.ActivationException;
+import com.example.pms.user.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,12 +15,14 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class SignController {
     private final SignService signService;
+    private final UserService userService;
 
     @GetMapping("/login")
     public String login() {
         return "login";
     }
 
+    //reseting password
     @GetMapping("/forgottenPassword")
     public String forgottenPassword(Model model) {
         RegisterRequest registerRequest = new RegisterRequest();
@@ -55,9 +58,9 @@ public class SignController {
         }
 
         model.addAttribute("registerRequest", registerRequest);
-//        model.addAttribute("stringToken", token);
         return "forgotten-password_submit";
     }
+
 
     @PostMapping("/passwordReset/{token}")
     public String passwordResetPost(Model model,
@@ -73,6 +76,8 @@ public class SignController {
 
         return "redirect:/login";
     }
+
+    //register new user
 
     @GetMapping("/signupGet")
     public String signupGet(Model model) {
@@ -92,13 +97,16 @@ public class SignController {
             return "error";
         }
 
-        return "redirect:/login";
+        model.addAttribute("exceptionMessage", "Activation link was sent to your email!");
+        return "error";
+//        return "redirect:/login";
     }
 
     @GetMapping("/accountVerification/{token}")
     public String verifyAccount(@PathVariable String token, Model model) {
         try {
             signService.verifyAccount(token);
+            userService.createLog("User account confirmed");
         } catch (ActivationException exception) {
             model.addAttribute("exceptionMessage", "Account activation error");
         }

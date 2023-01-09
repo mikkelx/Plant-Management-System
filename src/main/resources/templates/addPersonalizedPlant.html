@@ -73,7 +73,16 @@
                             <tr>
                                 <td>
                                     <select style="text-align: center" class="form-control" id="potdaysdropDownList" th:field="*{lastPotReplacement}">
-                                        <option value="0" >How long ago was last fertilizing?</option>
+                                        <option value="0" >How long ago was last pot replacement?</option>
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                </td>
+                            <tr/>
+
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="soildaysdropDownList" th:field="*{lastSoilReplacement}">
+                                        <option value="0" >How long ago was last soil replacement?</option>
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
                                 </td>

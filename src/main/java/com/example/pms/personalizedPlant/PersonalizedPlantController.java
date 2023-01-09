@@ -5,12 +5,14 @@ import com.example.pms.dto.RegisterPersonalizedPlant;
 import com.example.pms.home.HomeService;
 import com.example.pms.plant.Plant;
 import com.example.pms.plant.PlantRepository;
+import com.example.pms.userLog.PlantLog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -23,20 +25,6 @@ public class PersonalizedPlantController {
     private final HomeService homeService;
 
 
-//    @GetMapping
-//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(personalizedPlantService.getYours());
-//    }
-//
-
-//    @PostMapping
-//    public ResponseEntity<PersonalizedPlantDto> createPresonalizedPlant(@RequestBody PersonalizedPlantDto personalizedPlantDto) {
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(personalizedPlantService.saveDto(personalizedPlantDto));
-//    }
 
     @GetMapping("/getById")
     public String getPlantById(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
@@ -73,6 +61,96 @@ public class PersonalizedPlantController {
 
         return "redirect:/";
     }
+
+    @GetMapping("/delete")
+    public String delete(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
+
+        try {
+            personalizedPlantService.delete(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/getPlantLogs")
+    public String getPlantLogs(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
+        List<PlantLog> plantLogsList = personalizedPlantService.getPlantLogs(Id);
+        model.addAttribute("plantLogsList", plantLogsList);
+        return "plantLogs";
+    }
+
+    @GetMapping("/water")
+    public String water(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.waterPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/fertilizer")
+    public String fertilizer(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.fertilizerPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/pot")
+    public String pot(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.potPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/soil")
+    public String soil(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.soilPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+
+    //    @GetMapping
+//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(personalizedPlantService.getYours());
+//    }
+//
+
+//    @PostMapping
+//    public ResponseEntity<PersonalizedPlantDto> createPresonalizedPlant(@RequestBody PersonalizedPlantDto personalizedPlantDto) {
+//        return ResponseEntity
+//                .status(HttpStatus.CREATED)
+//                .body(personalizedPlantService.saveDto(personalizedPlantDto));
+//    }
+
 
     //submitting new plant
 //    @PostMapping("/submitPersonalizedPlantForm")

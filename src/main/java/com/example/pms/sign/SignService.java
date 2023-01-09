@@ -6,6 +6,7 @@ import com.example.pms.exceptions.ActivationException;
 import com.example.pms.user.User;
 import com.example.pms.user.UserRepository;
 import com.example.pms.user.UserRole;
+import com.example.pms.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,6 +22,7 @@ public class SignService {
     private final UserRepository userRepository;
     private final VerificationTokenRepository verificationTokenRepository;
     private final MailService mailService;
+    private final UserService userService;
 
     @Transactional
     public void signup(RegisterRequest registerRequest) throws IllegalStateException{
@@ -44,6 +46,7 @@ public class SignService {
         user.setUserRole(UserRole.USER);
 
         userRepository.save(user);
+        userService.createLog("User registered, activation email sent", user);
 
         String token = generateVerificationToken(user);
         mailService.sendMail(new NotificationEmail("Please Activate your Account", user.getEmail(),
@@ -67,6 +70,7 @@ public class SignService {
         fetchUserAndEnable(verificationToken.get());
     }
 
+
     private void fetchUserAndEnable(VerificationToken verificationToken) {
         String username = verificationToken.getUser().getUsername();
         User user = userRepository.findByUsername(username).orElseThrow(() ->
@@ -79,6 +83,8 @@ public class SignService {
         User user = userRepository.findByEmail(email).orElseThrow(() -> new ActivationException("Email is wrong!"));
         VerificationToken verificationToken = verificationTokenRepository.findByUserUserId(user.getUserId()).orElseThrow(() -> new ActivationException("Email is wrong!"));
 
+        userService.createLog("Password rest link sent to email", user);
+
         mailService.sendMail(new NotificationEmail("Password reset", user.getEmail(),
                 "THere is your link to reset password, click on the link to change:" +
                         "http://localhost:8100/auth/passwordReset/" + verificationToken.getToken()));
@@ -90,6 +96,7 @@ public class SignService {
             verificationToken.orElseThrow(() -> new ActivationException("Invalid Token"));
             User user = verificationToken.get().getUser();
             user.setPassword(passwordEncoder.encode(newPassword));
+            userService.createLog("Password changed", user);
             userRepository.save(user);
             return;
         }

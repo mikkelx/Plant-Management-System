@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -62,8 +64,7 @@
                             </a>
                             </td>
 
-                            <td style="text-align: center;">
-                                <div class="alert alert-success" role="alert" style="text-align: center;"><span><strong>Alert</strong> text.</span></div>
+                            <td style="text-align: center;" th:text="${yourPlant.message}">
                             </td>
                         </tr>
                     </tbody>
