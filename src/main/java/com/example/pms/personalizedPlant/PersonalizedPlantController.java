@@ -5,6 +5,7 @@ import com.example.pms.dto.RegisterPersonalizedPlant;
 import com.example.pms.home.HomeService;
 import com.example.pms.plant.Plant;
 import com.example.pms.plant.PlantRepository;
+import com.example.pms.userLog.PlantLog;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,27 @@ public class PersonalizedPlantController {
         return "redirect:/";
     }
 
+    @GetMapping("/delete")
+    public String delete(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
+
+        try {
+            personalizedPlantService.delete(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/";
+    }
+
+    @GetMapping("/getPlantLogs")
+    public String getPlantLogs(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
+        List<PlantLog> plantLogsList = personalizedPlantService.getPlantLogs(Id);
+        model.addAttribute("plantLogsList", plantLogsList);
+        return "plantLogs";
+    }
+
     @GetMapping("/water")
     public String water(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
         try {
@@ -91,6 +113,19 @@ public class PersonalizedPlantController {
     public String pot(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
         try {
             personalizedPlantService.potPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/soil")
+    public String soil(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.soilPlantById(Id);
         } catch (Exception exception) {
             String exceptionMessage = exception.getMessage();
             model.addAttribute("exceptionMessage", exceptionMessage);

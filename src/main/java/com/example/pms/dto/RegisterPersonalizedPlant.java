@@ -16,5 +16,6 @@ public class RegisterPersonalizedPlant {
     private Integer lastWatering;
     private Integer lastFertilizing;
     private Integer lastPotReplacement;
+    private Integer lastSoilReplacement;
     private String plantName;
 }

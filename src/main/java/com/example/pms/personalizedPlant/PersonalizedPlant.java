@@ -5,12 +5,8 @@ import com.example.pms.user.User;
 import lombok.*;
 import jakarta.persistence.*;
 
-import org.jetbrains.annotations.NotNull;
-import org.springframework.cglib.core.Local;
-
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
 
 @Entity
 @Table
@@ -27,10 +23,12 @@ public class PersonalizedPlant {
     private LocalDate lastWatering;
     private LocalDate lastFertilizing;
     private LocalDate lastPotReplacement;
+    private LocalDate lastSoilReplacement;
     private String message;
-    private boolean wateringSent;
-    private boolean fertilizerSent;
-    private boolean potSent;
+    private boolean wateringNotificationSent;
+    private boolean fertilizerNotificationSent;
+    private boolean potNotificationSent;
+    private boolean soilNotificationSent;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
@@ -47,18 +45,19 @@ public class PersonalizedPlant {
 //    }
 
     public PersonalizedPlant(User user, Plant plant, String userLabel, LocalDate lastWatering,
-                             LocalDate lastFertilizing, LocalDate lastPotReplacement) {
+                             LocalDate lastFertilizing, LocalDate lastPotReplacement, LocalDate lastSoilReplacement) {
         this.userLabel = userLabel;
         this.lastWatering = lastWatering;
         this.lastFertilizing = lastFertilizing;
         this.user = user;
         this.plant = plant;
         this.lastPotReplacement = lastPotReplacement;
+        this.lastSoilReplacement = lastSoilReplacement;
         this.message = "";
-        this.wateringSent = false;
-        this.fertilizerSent = false;
-        this.potSent = false;
-
+        this.wateringNotificationSent = false;
+        this.fertilizerNotificationSent = false;
+        this.potNotificationSent = false;
+        this.soilNotificationSent = false;
     }
 
     public PersonalizedPlant(User user, Plant plant, String userLabel) {
@@ -68,10 +67,12 @@ public class PersonalizedPlant {
         this.lastWatering = LocalDate.now();
         this.lastFertilizing = LocalDate.now();
         this.lastPotReplacement = LocalDate.now();
+        this.lastSoilReplacement = LocalDate.now();
         this.message = "";
-        this.wateringSent = false;
-        this.fertilizerSent = false;
-        this.potSent = false;
+        this.wateringNotificationSent = false;
+        this.fertilizerNotificationSent = false;
+        this.potNotificationSent = false;
+        this.soilNotificationSent = false;
     }
 
     public User getUser() {
@@ -99,6 +100,10 @@ public class PersonalizedPlant {
 
         if(this.needPotReplacement()) {
             this.message += "Replace my pot! ";
+        }
+
+        if(this.needSoilReplacement()) {
+            this.message += "Replace my soil! ";
         }
 
         return this.message;
@@ -134,16 +139,26 @@ public class PersonalizedPlant {
         return false;
     }
 
-    public boolean isWateringSent() {
-        return wateringSent;
+    public boolean needSoilReplacement() {
+        LocalDate now = LocalDate.now();
+
+        Long soilTime = ChronoUnit.DAYS.between(this.lastSoilReplacement, now);
+        if(plant.getSoilType().getFreqOfReplacementInDays() <= soilTime) {
+            return true;
+        }
+        return false;
     }
 
-    public boolean isFertilizerSent() {
-        return fertilizerSent;
+    public boolean isWateringNotificationSent() {
+        return wateringNotificationSent;
     }
 
-    public boolean isPotSent() {
-        return potSent;
+    public boolean isFertilizerNotificationSent() {
+        return fertilizerNotificationSent;
+    }
+
+    public boolean isPotNotificationSent() {
+        return potNotificationSent;
     }
 
     @Override

@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>FAQ - Brand</title>
+    <title>Pricing - Brand</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
@@ -25,89 +25,27 @@
             </div>
         </div>
     </nav>
-    <section class="py-5 my-5">
-        <div class="container" style="text-align: center;width: 665px;">
+    <section class="py-5 mt-5">
+        <div class="container py-4 py-xl-5" style="width: 477px;">
+
             <div class="table-responsive">
-                <form th:action="@{/personalizedplant/submitNew}" th:object="${registerPersonalizedPlant}" method="post" role="form">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <select style="text-align: center" class="form-control" id="plantsdropDownList" th:field="*{plantName}">
-                                        <option value="0" >select option</option>
-                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant.plantName}" ></option>
-                                    </select>
-                                </td>
-                            <tr/>
-
-                            <tr>
-                                <td>
-<!--                                    <div class="mb-3"><input class="shadow-sm form-control" type="text" name="email" placeholder="Email" th:field="*{email}"></div>-->
-                                    <input style="text-align: center" class="shadow-sm form-control" type="text" name="userLabel" placeholder="Your Label" th:field="*{userLabel}">
-                                </td>
-                            <tr/>
-
-                            <tr>
-                                <td>
-                                    <select style="text-align: center" class="form-control" id="wateringdaysdropDownList" th:field="*{lastWatering}">
-                                        <option value="0" >How long ago was last watering?</option>
-                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
-                                    </select>
-                                </td>
-                            <tr/>
-
-                            <tr>
-                                <td>
-                                    <select style="text-align: center" class="form-control" id="fertilizingdaysdropDownList" th:field="*{lastFertilizing}">
-                                        <option value="0" >How long ago was last fertilizing?</option>
-                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
-                                    </select>
-                                </td>
-                            <tr/>
-
-                            <tr>
-                                <td>
-                                    <select style="text-align: center" class="form-control" id="potdaysdropDownList" th:field="*{lastPotReplacement}">
-                                        <option value="0" >How long ago was last pot replacement?</option>
-                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
-                                    </select>
-                                </td>
-                            <tr/>
-
-                            <tr>
-                                <td>
-                                    <select style="text-align: center" class="form-control" id="soildaysdropDownList" th:field="*{lastSoilReplacement}">
-                                        <option value="0" >How long ago was last soil replacement?</option>
-                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
-                                    </select>
-                                </td>
-                            <tr/>
-
-<!--                            <tr>-->
-<!--                                <td>-->
-<!--                                    <div>-->
-<!--                                        <label for="lastWatering">Last Watering:</label>-->
-<!--                                        <input type="date"  name="lastWatering"/>-->
-<!--&lt;!&ndash;                                        <label for="student-birth-date">Date of birth:</label>&ndash;&gt;-->
-<!--&lt;!&ndash;                                        <input type="date" th:field="${student.birthDate}" id="student-birth-date"/>&ndash;&gt;-->
-<!--                                    </div>-->
-<!--                                </td>-->
-<!--                            </tr>-->
-
-                            <tr>
-                                <td>
-                                    <button class="btn btn-primary shadow" type="submit">Submit</button>
-                                </td>
-                            </tr>
-
-                        </tbody>
-                    </table>
-                </form>
+                <table class="table">
+<!--                    <input type="hidden" th:field="*{}" />-->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Log</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="log : ${plantLogsList}">
+                        <tr>
+                            <td style="text-align: center;" th:text="${log.getPlantLogId()}"> </td>
+                            <td style="text-align: center;" th:text="${log.getDate()}"> </td>
+                            <td style="text-align: center;" th:text="${log.getLog()}"> </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </section>

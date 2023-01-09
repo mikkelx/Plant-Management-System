@@ -1,7 +1,6 @@
 package com.example.pms.home;
 
 import com.example.pms.dto.NotificationEmail;
-import com.example.pms.dto.PersonalizedPlantDto;
 import com.example.pms.exceptions.PlantNotFoundException;
 import com.example.pms.personalizedPlant.PersonalizedPlant;
 import com.example.pms.personalizedPlant.PersonalizedPlantRepository;
@@ -17,7 +16,6 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -58,27 +56,36 @@ public class HomeService {
 
             if(personalizedPlantList.get(i).needWatering()) {
                 message += "Water me! ";
-                if(!personalizedPlant.isWateringSent()) {
+                if(!personalizedPlant.isWateringNotificationSent()) {
                     this.sendReminder(personalizedPlant.getUserLabel(), "watering");
-                    personalizedPlant.setWateringSent(true);
+                    personalizedPlant.setWateringNotificationSent(true);
                 }
 
             }
 
             if(personalizedPlantList.get(i).needFertilizing()) {
                 message += "Fertilize me! ";
-                if(!personalizedPlant.isFertilizerSent()) {
+                if(!personalizedPlant.isFertilizerNotificationSent()) {
                     this.sendReminder(personalizedPlant.getUserLabel(), "fertilizing");
-                    personalizedPlant.setFertilizerSent(true);
+                    personalizedPlant.setFertilizerNotificationSent(true);
                 }
 
             }
 
             if(personalizedPlantList.get(i).needPotReplacement()) {
                 message += "Replace my pot! ";
-                if(!personalizedPlant.isPotSent()) {
+                if(!personalizedPlant.isPotNotificationSent()) {
                     this.sendReminder(personalizedPlant.getUserLabel(), "pot replacement");
-                    personalizedPlant.setPotSent(true);
+                    personalizedPlant.setPotNotificationSent(true);
+                }
+
+            }
+
+            if(personalizedPlantList.get(i).needSoilReplacement()) {
+                message += "Replace my soil! ";
+                if(!personalizedPlant.isSoilNotificationSent()) {
+                    this.sendReminder(personalizedPlant.getUserLabel(), "soil replacement");
+                    personalizedPlant.setSoilNotificationSent(true);
                 }
 
             }

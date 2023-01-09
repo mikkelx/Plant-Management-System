@@ -73,6 +73,10 @@
                             <td>Last Pot Replacement</td>
                             <td th:text="${personalizedPlant.getLastPotReplacement()}">
                         </tr>
+                        <tr>
+                            <td>Last Soil Replacement</td>
+                            <td th:text="${personalizedPlant.getLastSoilReplacement()}">
+                        </tr>
 
                         <tr>
                             <td style="text-align: center;" >
@@ -100,18 +104,34 @@
                                 </a>
                             </td>
                             <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/soil(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                        Soil
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;" >
                                 <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
                                 <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
                                     Update
                                 </button>
                                 <!--                                </a>-->
                             </td>
+                            <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/delete(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                        Delete
+                                    </button>
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
             <div class="table-responsive">
-                <table class="table" style="border-color: white">
+                <table class="table" style="border-color: white;text-align: center">
                     <thead>
                     <tr>
                         <th></th>
@@ -119,18 +139,17 @@
                     </thead>
                     <tbody>
                     <tr>
-                        <td style="text-align: center;" >
-
-                            <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
-                            <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
-                                Delete
-                            </button>
-                            <!--                                </a>-->
+                        <td>
+                            <a th:href="@{/personalizedplant/getPlantLogs(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    See History
+                                </button>
+                            </a>
                         </td>
                     </tr>
                     </tbody>
-                </table>
 
+                </table>
             </div>
         </div>
     </section>
