@@ -1,5 +1,6 @@
 package com.example.pms.dto;
 
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,9 +9,15 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegisterRequest {
+
     private String email;
+    @Pattern(regexp = "^(?:(?=.*[a-z]).*)[^\\s]{6,}$", message = "Username should contain minimum six characters")
     private String username;
+
+//    @Pattern(regexp = "^[^0]+$", message="Plant must be choosen!")
+    @Pattern(regexp = "^(?:(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*)[^\\s]{8,}$", message = "Password should contain minimum eight characters, at least one uppercase and lowercase letter and one number:")
     private String password;
+    @Pattern(regexp = "^(?:(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).*)[^\\s]{8,}$", message = "Password should contain minimum eight characters, at least one uppercase and lowercase letter and one number:")
     private String password_repeat;
 
     private String token;
@@ -35,9 +42,6 @@ public class RegisterRequest {
         return password;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     public String getPassword_repeat() {
         return password_repeat;

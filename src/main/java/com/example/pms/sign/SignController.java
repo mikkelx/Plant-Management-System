@@ -3,11 +3,13 @@ package com.example.pms.sign;
 import com.example.pms.dto.RegisterRequest;
 import com.example.pms.exceptions.ActivationException;
 import com.example.pms.user.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -87,19 +89,32 @@ public class SignController {
     }
 
     @PostMapping("/signup")
-    public String signup(Model model, @ModelAttribute("registerRequest") RegisterRequest registerRequest){
+    public String signup(Model model,
+                         @Valid @ModelAttribute("registerRequest") RegisterRequest registerRequest,
+                         BindingResult bindingResult){
         //model.addAttribute("registerRequest", registerRequest);
-        try {
-            signService.signup(registerRequest);
-        } catch (Exception exception) {
-            String exceptionMessage = exception.getMessage();
-            model.addAttribute("exceptionMessage", exceptionMessage);
-            return "error";
+        if(bindingResult.hasErrors()) {
+            return "signup";
         }
+
+        signService.signup(registerRequest, bindingResult);
+        if(bindingResult.hasErrors()) {
+            return "signup";
+        }
+
+//        try {
+//            signService.signup(registerRequest, bindingResult);
+//            if(bindingResult.hasErrors()) {
+//                return "signup";
+//            }
+//        } catch (Exception exception) {
+//            String exceptionMessage = exception.getMessage();
+//            model.addAttribute("exceptionMessage", exceptionMessage);
+//            return "error";
+//        }
 
         model.addAttribute("exceptionMessage", "Activation link was sent to your email!");
         return "error";
-//        return "redirect:/login";
     }
 
     @GetMapping("/accountVerification/{token}")

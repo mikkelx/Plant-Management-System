@@ -40,8 +40,10 @@
                                 <td>
                                     <select style="text-align: center" class="form-control" id="plantsdropDownList" th:field="*{plantName}">
                                         <option value="0" >select option</option>
-                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant.plantName}" ></option>
+                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant.plantName}" >
+                                        </option>
                                     </select>
+                                    <p th:if="${#fields.hasErrors('plantName')}" style="color:red;" th:errors="*{plantName}"/>
                                 </td>
                             <tr/>
 
@@ -49,42 +51,52 @@
                                 <td>
 <!--                                    <div class="mb-3"><input class="shadow-sm form-control" type="text" name="email" placeholder="Email" th:field="*{email}"></div>-->
                                     <input style="text-align: center" class="shadow-sm form-control" type="text" name="userLabel" placeholder="Your Label" th:field="*{userLabel}">
+                                    <p th:if="${#fields.hasErrors('userLabel')}" style="color:red;" th:errors="*{userLabel}"/>
+
                                 </td>
                             <tr/>
 
                             <tr>
                                 <td>
+                                    <p class="text-muted">How long ago was last watering?</p>
                                     <select style="text-align: center" class="form-control" id="wateringdaysdropDownList" th:field="*{lastWatering}">
-                                        <option value="0" >How long ago was last watering?</option>
+<!--                                        <option value="-1" >How long ago was last watering?</option>-->
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
+                                    <p th:if="${#fields.hasErrors('lastWatering')}" style="color:red;" th:errors="*{lastWatering}"/>
                                 </td>
                             <tr/>
 
                             <tr>
                                 <td>
+                                    <p class="text-muted">How long ago was last fertilizing?</p>
                                     <select style="text-align: center" class="form-control" id="fertilizingdaysdropDownList" th:field="*{lastFertilizing}">
-                                        <option value="0" >How long ago was last fertilizing?</option>
+<!--                                        <option value="0" >How long ago was last fertilizing?</option>-->
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
+                                    <p th:if="${#fields.hasErrors('lastFertilizing')}" style="color:red;" th:errors="*{lastFertilizing}"/>
                                 </td>
                             <tr/>
 
                             <tr>
                                 <td>
+                                    <p class="text-muted">How long ago was last pot replacement?</p>
                                     <select style="text-align: center" class="form-control" id="potdaysdropDownList" th:field="*{lastPotReplacement}">
-                                        <option value="0" >How long ago was last pot replacement?</option>
+<!--                                        <option value="0" >How long ago was last pot replacement?</option>-->
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
+                                    <p th:if="${#fields.hasErrors('lastPotReplacement')}" style="color:red;" th:errors="*{lastPotReplacement}"/>
                                 </td>
                             <tr/>
 
                             <tr>
                                 <td>
+                                    <p class="text-muted">How long ago was last soil replacement?</p>
                                     <select style="text-align: center" class="form-control" id="soildaysdropDownList" th:field="*{lastSoilReplacement}">
-                                        <option value="0" >How long ago was last soil replacement?</option>
+<!--                                        <option value="0" >How long ago was last soil replacement?</option>-->
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
+                                    <p th:if="${#fields.hasErrors('lastSoilReplacement')}" style="color:red;" th:errors="*{lastSoilReplacement}"/>
                                 </td>
                             <tr/>
 
