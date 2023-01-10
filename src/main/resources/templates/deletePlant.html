@@ -6,7 +6,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-    <title>Sign up - Brand</title>
+    <title>FAQ - Brand</title>
     <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
 </head>
@@ -19,37 +19,44 @@
                     <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
                     <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
                 </ul>
+                <form th:action="@{/logout}" method="post">
+                    <input  type="submit" value="Logout" class="btn btn-primary shadow" role="button">
+                </form>
             </div>
         </div>
     </nav>
-    <section class="py-4 py-md-5 my-5">
-        <div class="container py-md-5">
-            <div class="row">
-                <div class="col-md-6 text-center"><img class="img-fluid w-100" th:src="@{/img/illustrations/register.svg}"></div>
-                <div class="col-md-5 col-xl-4 text-center text-md-start">
-                    <h2 class="display-6 fw-bold mb-5"><span class="underline pb-1"><strong>Sign up</strong></span></h2>
+    <section class="py-5 my-5">
+        <div class="container" style="text-align: center;width: 665px;">
+            <div class="table-responsive">
+                <form th:action="@{/plant/submitDelete}" th:object="${registerPlant}" method="get" role="form">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select style="text-align: center" class="form-control" id="plantsdropDownList" th:field="*{plantName}">
+                                        <option value="0" >select option</option>
+                                        <option th:each="plant : ${allPlants}" th:value="${plant}" th:text="${plant.plantName}" >
+                                        </option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('plantName')}" style="color:red;" th:errors="*{plantName}"/>
+                                </td>
+                            <tr/>
 
-                    <form role="form" method="post" th:action="@{/auth/signup}" th:object="${registerRequest}">
-                        <div class="mb-3"><input class="shadow-sm form-control" type="email" name="email" placeholder="Email" th:field="*{email}">
-                            <p th:if="${#fields.hasErrors('email')}" style="color:red;" th:errors="*{email}"/> </div>
-                        <div class="mb-3"><input class="shadow-sm form-control" type="text" name="username" placeholder="Username" th:field="*{username}">
-                            <p th:if="${#fields.hasErrors('username')}" style="color:red;" th:errors="*{username}"/> </div>
-                        <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password" placeholder="Password" th:field="*{password}">
-                            <p th:if="${#fields.hasErrors('password')}" style="color:red;" th:errors="*{password}"/> </div>
-                        <div class="mb-3"><input class="shadow-sm form-control" type="password" name="password_repeat" placeholder="Repeat Password" th:field="*{password_repeat}">
-                            <p th:if="${#fields.hasErrors('password_repeat')}" style="color:red;" th:errors="*{password_repeat}"/></div>
-                        <div class="mb-5">
-                            <button class="btn btn-primary shadow" type="submit">Create account</button></div>
 
-                        <p class="text-muted">Have an account? <a th:href="@{/auth/login}">Log in&nbsp;<svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icon-tabler-arrow-narrow-right">
-                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <line x1="15" y1="16" x2="19" y2="12"></line>
-                                    <line x1="15" y1="8" x2="19" y2="12"></line>
-                                </svg></a>&nbsp;</p>
-                    </form>
+                            <tr>
+                                <td>
+                                    <button class="btn btn-primary shadow" type="submit">Submit</button>
+                                </td>
+                            </tr>
 
-                </div>
+                        </tbody>
+                    </table>
+                </form>
             </div>
         </div>
     </section>

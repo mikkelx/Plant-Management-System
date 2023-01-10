@@ -9,4 +9,9 @@ import java.util.Optional;
 public interface PlantRepository extends JpaRepository<Plant, Long> {
     Plant findByPlantId(Long Id);
     Optional<Plant> findByPlantName(String plantName);
+
+    Boolean existsPlantsByPlantName(String plantName);
+    Long deleteByPlantName(String plantName);
+
+
 }

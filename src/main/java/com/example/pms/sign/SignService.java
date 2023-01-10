@@ -11,6 +11,7 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.BindingResult;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -25,17 +26,23 @@ public class SignService {
     private final UserService userService;
 
     @Transactional
-    public void signup(RegisterRequest registerRequest) throws IllegalStateException{
+    public BindingResult signup(RegisterRequest registerRequest, BindingResult bindingResult) throws IllegalStateException{
         boolean userExists = userRepository.findByEmail(registerRequest.getEmail()).isPresent();
         if(userExists) {
-            throw new IllegalStateException("Email: "+ registerRequest.getEmail() + " is already registered!");
+            bindingResult.rejectValue("email", "error.user", "Email: "+ registerRequest.getEmail() + " is already registered!");
+            return bindingResult;
+//            throw new IllegalStateException("Email: "+ registerRequest.getEmail() + " is already registered!");
         }
         userExists = userRepository.findByUsername(registerRequest.getUsername()).isPresent();
         if(userExists) {
-            throw new IllegalStateException("Username: "+ registerRequest.getUsername() + " is already taken!");
+            bindingResult.rejectValue("username", "error.user", "Username: "+ registerRequest.getUsername() + " is already taken!");
+            return bindingResult;
+            //throw new IllegalStateException("Username: "+ registerRequest.getUsername() + " is already taken!");
         }
         if(!registerRequest.getPassword().equals(registerRequest.getPassword_repeat())) {
-            throw new IllegalStateException("Passwords are not matching!");
+            bindingResult.rejectValue("password_repeat", "error.user", "Passwords are not matching!");
+            return bindingResult;
+            //throw new IllegalStateException("Passwords are not matching!");
         }
 
         User user = new User();
@@ -52,6 +59,8 @@ public class SignService {
         mailService.sendMail(new NotificationEmail("Please Activate your Account", user.getEmail(),
                 "Thanks for signing up for PMS, click on the link to activate your account:" +
                         "http://localhost:8100/auth/accountVerification/" + token));
+
+        return bindingResult;
     }
 
     private String generateVerificationToken(User user) {

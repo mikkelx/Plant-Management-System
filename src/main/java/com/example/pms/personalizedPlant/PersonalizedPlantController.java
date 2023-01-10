@@ -6,11 +6,13 @@ import com.example.pms.home.HomeService;
 import com.example.pms.plant.Plant;
 import com.example.pms.plant.PlantRepository;
 import com.example.pms.userLog.PlantLog;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -48,8 +50,19 @@ public class PersonalizedPlantController {
     }
 
     @PostMapping("/submitNew")
-    public String submitPersonalizedPlantForm(Model model,
-                                              @ModelAttribute("registerPersonalizedPlant") RegisterPersonalizedPlant registerPersonalizedPlant) {
+    public String submitPersonalizedPlantForm(@Valid @ModelAttribute("registerPersonalizedPlant") RegisterPersonalizedPlant registerPersonalizedPlant,
+                                              BindingResult bindingResult,
+                                              Model model) {
+        if(bindingResult.hasErrors()) {
+            List<Plant> plants = plantRepository.findAll();
+            List<Integer> daysList = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+                    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+
+            model.addAttribute("registerPersonalizedPlant", registerPersonalizedPlant);
+            model.addAttribute("allPlants", plants);
+            model.addAttribute("days", daysList);
+            return "addPersonalizedPlant";
+        }
 
         try {
             personalizedPlantService.save(registerPersonalizedPlant);
