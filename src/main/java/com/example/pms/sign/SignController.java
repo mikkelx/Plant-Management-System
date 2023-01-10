@@ -92,7 +92,6 @@ public class SignController {
     public String signup(Model model,
                          @Valid @ModelAttribute("registerRequest") RegisterRequest registerRequest,
                          BindingResult bindingResult){
-        //model.addAttribute("registerRequest", registerRequest);
         if(bindingResult.hasErrors()) {
             return "signup";
         }

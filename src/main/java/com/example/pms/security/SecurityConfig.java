@@ -26,7 +26,7 @@ public class SecurityConfig {
         http.authorizeRequests(authorization -> authorization
                         .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/personalizedplant/**").hasAnyAuthority("USER", "ADMIN")
-//                        .requestMatchers("/plant").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/plant/**").permitAll()//TODO
 //                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
 //                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
                         .requestMatchers("/bootstrap/**",

@@ -38,7 +38,7 @@ public class PersonalizedPlantService {
         save.setPlant(plantRepository.findByPlantName(registerPersonalizedPlant.getPlantName())
                 .orElseThrow(() -> new PlantNotFoundException("Plant not found in db!")));
 
-        userService.createLog("Added new plant: " + registerPersonalizedPlant.getPlantName(), user);
+        userService.createLog("Added new user plant: " + registerPersonalizedPlant.getPlantName(), user);
         this.createPlantLog(registerPersonalizedPlant.getUserLabel() + " created!", save);
 
         personalizedPlantRepository.save(save);
