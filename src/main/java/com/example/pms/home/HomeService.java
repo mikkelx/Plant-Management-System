@@ -7,6 +7,7 @@ import com.example.pms.personalizedPlant.PersonalizedPlantRepository;
 import com.example.pms.sign.MailService;
 import com.example.pms.user.User;
 import com.example.pms.user.UserRepository;
+import com.example.pms.user.UserRole;
 import com.example.pms.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -47,6 +48,10 @@ public class HomeService {
         String username = (String) auth.getPrincipal();
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Cannot find user!"));
         return user;
+    }
+
+    public UserRole getCurrentUserRole() {
+        return this.getCurrentUser().getUserRole();
     }
 
     public String checkIfActionNeeded(List<PersonalizedPlant> personalizedPlantList) {

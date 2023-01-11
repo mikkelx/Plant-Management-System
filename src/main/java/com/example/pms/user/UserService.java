@@ -49,4 +49,16 @@ public class UserService implements UserDetailsService {
         return user;
     }
 
+    public Long getCurrentUserId(){
+        return this.getCurrentUser().getUserId();
+    }
+
+    public User getUserById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+        return user;
+    }
+
+    public void deleteById(Long userId) {
+        userRepository.deleteById(userId);
+    }
 }

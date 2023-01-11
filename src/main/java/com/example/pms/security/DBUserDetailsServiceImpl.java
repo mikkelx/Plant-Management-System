@@ -21,12 +21,6 @@ public class DBUserDetailsServiceImpl implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-//        Optional<User> optional = repository.findByUsername(username);
-//        if (optional.isEmpty()){
-//            throw new UsernameNotFoundException("Username not found");
-//        }
-//        User retrievedUser = optional.get();
-//        return new DBUserDetails(retrievedUser);
         User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("XD"));
         return user;
     }
