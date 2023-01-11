@@ -44,6 +44,10 @@ public class PlantService {
         Plant plant = new Plant();
         plant.setPlantName(registerPlant.getPlantName());
         plant.setWateringTimestampInDays(registerPlant.getWateringTimestampInDays());
+        plant.setSunExposureTimeStampInDays(registerPlant.getSunExposureTimeStampInDays());
+        plant.setHarvestingSeedingTimestampInDays(registerPlant.getHarvestingSeedingTimestampInDays());
+        plant.setPruningTimestampInDays(registerPlant.getPruningTimestampInDays());
+        plant.setCleaningLeavesTimestampInDays(registerPlant.getCleaningLeavesTimestampInDays());
         plant.setSoilType(soilRepository.findBySoilName(registerPlant.getSoilTypeName()));
         plant.setFertilizerType(fertilizerTypeRepository.findByFertilizerName(registerPlant.getFertilizerTypeName()));
         plant.setFlowerPot(flowerPotRepository.findByPotSize(registerPlant.getFlowerPotName()));
@@ -53,7 +57,6 @@ public class PlantService {
 
         userService.createLog("Added new system plant: " + registerPlant.getPlantName(), user);
         this.createTechnicalLog("Admin with ID: " + user.getUserId() + " added new system plant with name: " + registerPlant.getPlantName());
-
 
         return bindingResult;
     }

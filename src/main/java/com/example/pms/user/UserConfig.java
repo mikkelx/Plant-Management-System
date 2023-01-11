@@ -51,7 +51,11 @@ public class UserConfig {
 
             Plant plant = new Plant(
                     "Storczyk",
-                    7,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
                     humusSoil,
                     fertilizerType,
                     flowerPot
@@ -60,6 +64,10 @@ public class UserConfig {
             Plant plant1 = new Plant(
                     "Dracena Deremeńska",
                     2,
+                    3,
+                    4,
+                    5,
+                    6,
                     peatSoil,
                     fertilizerType,
                     flowerPot

@@ -54,6 +54,42 @@
                             <tr/>
                             <tr>
                                 <td>
+                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <select style="text-align: center" class="form-control" id="sundropDownList" th:field="*{sunExposureTimeStampInDays}">
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('sunExposureTimeStampInDays')}" style="color:red;" th:errors="*{sunExposureTimeStampInDays}"/>
+                                </td>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <select style="text-align: center" class="form-control" id="harvestdropDownList" th:field="*{harvestingSeedingTimestampInDays}">
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('harvestingSeedingTimestampInDays')}" style="color:red;" th:errors="*{harvestingSeedingTimestampInDays}"/>
+                                </td>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <select style="text-align: center" class="form-control" id="pruningdropDownList" th:field="*{pruningTimestampInDays}">
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('pruningTimestampInDays')}" style="color:red;" th:errors="*{pruningTimestampInDays}"/>
+                                </td>
+                            <tr/>
+                            <tr>
+                                <td>
+                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <select style="text-align: center" class="form-control" id="cleaningdropDownList" th:field="*{cleaningLeavesTimestampInDays}">
+                                        <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
+                                    </select>
+                                    <p th:if="${#fields.hasErrors('cleaningLeavesTimestampInDays')}" style="color:red;" th:errors="*{cleaningLeavesTimestampInDays}"/>
+                                </td>
+                            <tr/>
+                            <tr>
+                                <td>
                                     <p class="text-muted">Set soil type for this plant</p>
                                     <select style="text-align: center" class="form-control" id="soildropDownList" th:field="*{soilTypeName}">
                                         <option th:each="soilType : ${soilTypeList}" th:value="${soilType.soilName}" th:text="${soilType.soilName}" >

@@ -66,8 +66,24 @@
                                             <td th:text="${plant.getPlantName()}"> </td>
                                         </tr>
                                         <tr>
-                                            <td>Watering needed every</td>
+                                            <td>Need watering every</td>
                                             <td th:text="|${plant.getWateringTimestampInDays()} days|"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Need exposition on sun every</td>
+                                            <td th:text="|${plant.sunExposureTimeStampInDays} days|"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Need seed harvesting every</td>
+                                            <td th:text="|${plant.harvestingSeedingTimestampInDays} days|"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Need pruning every</td>
+                                            <td th:text="|${plant.pruningTimestampInDays} days|"></td>
+                                        </tr>
+                                        <tr>
+                                            <td>Need leaves cleaning every</td>
+                                            <td th:text="|${plant.cleaningLeavesTimestampInDays} days|"></td>
                                         </tr>
                                         <tr><td></td><td></td></tr>
                                         <tr>

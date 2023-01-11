@@ -19,6 +19,14 @@ public class RegisterPlant {
     private String plantName;
     @NotNull(message = "Choose watering timestamp!")
     private int wateringTimestampInDays;
+    @NotNull
+    private int sunExposureTimeStampInDays;
+    @NotNull
+    private int harvestingSeedingTimestampInDays;
+    @NotNull
+    private int pruningTimestampInDays;
+    @NotNull
+    private int cleaningLeavesTimestampInDays;
     private String soilTypeName;
     private String fertilizerTypeName;
     private String flowerPotName;
