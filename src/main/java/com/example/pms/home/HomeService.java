@@ -65,7 +65,34 @@ public class HomeService {
                     this.sendReminder(personalizedPlant.getUserLabel(), "watering");
                     personalizedPlant.setWateringNotificationSent(true);
                 }
-
+            }
+            if(personalizedPlantList.get(i).needSunExposure()) {
+                message += "Expose me to sun! ";
+                if(!personalizedPlant.isSunExposureNotificationSent()) {
+                    this.sendReminder(personalizedPlant.getUserLabel(), "exposing to sun");
+                    personalizedPlant.setSunExposureNotificationSent(true);
+                }
+            }
+            if(personalizedPlantList.get(i).needHarvesting()) {
+                message += "Harvest me! ";
+                if(!personalizedPlant.isHarvestingSeedingNotificationSent()) {
+                    this.sendReminder(personalizedPlant.getUserLabel(), "seeds harvesting");
+                    personalizedPlant.setHarvestingSeedingNotificationSent(true);
+                }
+            }
+            if(personalizedPlantList.get(i).needPruning()) {
+                message += "Prun me! ";
+                if(!personalizedPlant.isPruningNotificationSent()) {
+                    this.sendReminder(personalizedPlant.getUserLabel(), "pruning");
+                    personalizedPlant.setPruningNotificationSent(true);
+                }
+            }
+            if(personalizedPlantList.get(i).needPruning()) {
+                message += "Clean me! ";
+                if(!personalizedPlant.isCleaningLeavesNotificationSent()) {
+                    this.sendReminder(personalizedPlant.getUserLabel(), "cleaning");
+                    personalizedPlant.setCleaningLeavesNotificationSent(true);
+                }
             }
 
             if(personalizedPlantList.get(i).needFertilizing()) {

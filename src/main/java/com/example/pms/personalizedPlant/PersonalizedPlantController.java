@@ -41,7 +41,7 @@ public class PersonalizedPlantController {
 
         List<Plant> plants = plantRepository.findAll();
         List<Integer> daysList = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                                        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+                                        15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 60, 90);
 
         model.addAttribute("registerPersonalizedPlant", registerPersonalizedPlant);
         model.addAttribute("allPlants", plants);
@@ -56,7 +56,7 @@ public class PersonalizedPlantController {
         if(bindingResult.hasErrors()) {
             List<Plant> plants = plantRepository.findAll();
             List<Integer> daysList = List.of(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+                    15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 60, 90);
 
             model.addAttribute("registerPersonalizedPlant", registerPersonalizedPlant);
             model.addAttribute("allPlants", plants);
@@ -100,6 +100,58 @@ public class PersonalizedPlantController {
     public String water(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
         try {
             personalizedPlantService.waterPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/sun")
+    public String sun(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.sunPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/harvest")
+    public String harvest(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.harvestPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/pruning")
+    public String pruning(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.pruningPlantById(Id);
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
+
+        return "redirect:/getById?PersonalizedPlantId=" + Id;
+    }
+
+    @GetMapping("/clean")
+    public String clean(@RequestParam("PersonalizedPlantId") Long Id, Model model) {
+        try {
+            personalizedPlantService.cleanPlantById(Id);
         } catch (Exception exception) {
             String exceptionMessage = exception.getMessage();
             model.addAttribute("exceptionMessage", exceptionMessage);
@@ -180,12 +232,12 @@ public class PersonalizedPlantController {
 //                .body(personalizedPlantService.getYours());
 //    }
 
-    @GetMapping("/all")
-    public ResponseEntity<List<PersonalizedPlantDto>> getAllPersolizedPlants() throws Exception{
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(personalizedPlantService.getYours());
-    }
+//    @GetMapping("/all")
+//    public ResponseEntity<List<PersonalizedPlantDto>> getAllPersolizedPlants() throws Exception{
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(personalizedPlantService.getYours());
+//    }
 
 
 }

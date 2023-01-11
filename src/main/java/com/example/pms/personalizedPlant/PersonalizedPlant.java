@@ -2,6 +2,7 @@ package com.example.pms.personalizedPlant;
 
 import com.example.pms.plant.Plant;
 import com.example.pms.user.User;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import jakarta.persistence.*;
 
@@ -21,11 +22,20 @@ public class PersonalizedPlant {
     private Long personalizedPlantId;
     private String userLabel;
     private LocalDate lastWatering;
+    private LocalDate lastSunExposure;
+    private LocalDate lastHarvestingSeeding;
+    private LocalDate lastPruning;
+    private LocalDate lastCleaningLeaves;
+
     private LocalDate lastFertilizing;
     private LocalDate lastPotReplacement;
     private LocalDate lastSoilReplacement;
     private String message;
     private boolean wateringNotificationSent;
+    private boolean pruningNotificationSent;
+    private boolean sunExposureNotificationSent;
+    private boolean harvestingSeedingNotificationSent;
+    private boolean cleaningLeavesNotificationSent;
     private boolean fertilizerNotificationSent;
     private boolean potNotificationSent;
     private boolean soilNotificationSent;
@@ -44,6 +54,7 @@ public class PersonalizedPlant {
 //        this.lastWatering = lastWatering;
 //    }
 
+
     public PersonalizedPlant(User user, Plant plant, String userLabel, LocalDate lastWatering,
                              LocalDate lastFertilizing, LocalDate lastPotReplacement, LocalDate lastSoilReplacement) {
         this.userLabel = userLabel;
@@ -55,6 +66,10 @@ public class PersonalizedPlant {
         this.lastSoilReplacement = lastSoilReplacement;
         this.message = "";
         this.wateringNotificationSent = false;
+        this.sunExposureNotificationSent = false;
+        this.harvestingSeedingNotificationSent = false;
+        this.pruningNotificationSent = false;
+        this.cleaningLeavesNotificationSent = false;
         this.fertilizerNotificationSent = false;
         this.potNotificationSent = false;
         this.soilNotificationSent = false;
@@ -65,11 +80,19 @@ public class PersonalizedPlant {
         this.plant = plant;
         this.userLabel = userLabel;
         this.lastWatering = LocalDate.now();
+        this.lastSunExposure = LocalDate.now();
+        this.lastHarvestingSeeding = LocalDate.now();
+        this.lastPruning = LocalDate.now();
+        this.lastCleaningLeaves = LocalDate.now();
         this.lastFertilizing = LocalDate.now();
         this.lastPotReplacement = LocalDate.now();
         this.lastSoilReplacement = LocalDate.now();
         this.message = "";
         this.wateringNotificationSent = false;
+        this.sunExposureNotificationSent = false;
+        this.harvestingSeedingNotificationSent = false;
+        this.pruningNotificationSent = false;
+        this.cleaningLeavesNotificationSent = false;
         this.fertilizerNotificationSent = false;
         this.potNotificationSent = false;
         this.soilNotificationSent = false;
@@ -88,10 +111,25 @@ public class PersonalizedPlant {
     }
 
     public String checkActions() {
-        LocalDate now = LocalDate.now();
 
         if(this.needWatering()) {
             this.message += "Water me! ";
+        }
+
+        if(this.needSunExposure()) {
+            this.message += "Expose me to sun! ";
+        }
+
+        if(this.needHarvesting()) {
+            this.message += "Harvest me! ";
+        }
+
+        if(this.needPruning()) {
+            this.message += "Prun me! ";
+        }
+
+        if(this.needCleaning()) {
+            this.message += "Clean me! ";
         }
 
         if(this.needFertilizing()) {
@@ -114,6 +152,46 @@ public class PersonalizedPlant {
 
         Long wateringTime = ChronoUnit.DAYS.between(this.lastWatering, now);
         if(plant.getWateringTimestampInDays() <= wateringTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needSunExposure() {
+        LocalDate now = LocalDate.now();
+
+        Long sunExposure = ChronoUnit.DAYS.between(this.lastSunExposure, now);
+        if(plant.getSunExposureTimeStampInDays() <= sunExposure) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needHarvesting() {
+        LocalDate now = LocalDate.now();
+
+        Long harvestingTime = ChronoUnit.DAYS.between(this.lastHarvestingSeeding, now);
+        if(plant.getHarvestingSeedingTimestampInDays() <= harvestingTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needPruning() {
+        LocalDate now = LocalDate.now();
+
+        Long pruningTime = ChronoUnit.DAYS.between(this.lastPruning, now);
+        if(plant.getPruningTimestampInDays() <= pruningTime) {
+            return true;
+        }
+        return false;
+    }
+
+    public boolean needCleaning() {
+        LocalDate now = LocalDate.now();
+
+        Long cleaningTime = ChronoUnit.DAYS.between(this.lastCleaningLeaves, now);
+        if(plant.getCleaningLeavesTimestampInDays() <= cleaningTime) {
             return true;
         }
         return false;

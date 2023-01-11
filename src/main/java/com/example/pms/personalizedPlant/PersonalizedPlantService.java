@@ -32,6 +32,10 @@ public class PersonalizedPlantService {
         save.setUser(user);
         save.setUserLabel(registerPersonalizedPlant.getUserLabel());
         save.setLastWatering(LocalDate.now().minusDays(registerPersonalizedPlant.getLastWatering()));
+        save.setLastHarvestingSeeding(LocalDate.now().minusDays(registerPersonalizedPlant.getLastHarvestingSeeding()));
+        save.setLastSunExposure(LocalDate.now().minusDays(registerPersonalizedPlant.getLastSunExposure()));
+        save.setLastPruning(LocalDate.now().minusDays(registerPersonalizedPlant.getLastPruning()));
+        save.setLastCleaningLeaves(LocalDate.now().minusDays(registerPersonalizedPlant.getLastCleaningLeaves()));
         save.setLastFertilizing(LocalDate.now().minusDays(registerPersonalizedPlant.getLastFertilizing()));
         save.setLastPotReplacement(LocalDate.now().minusDays(registerPersonalizedPlant.getLastPotReplacement()));
         save.setLastSoilReplacement(LocalDate.now().minusDays(registerPersonalizedPlant.getLastSoilReplacement()));
@@ -71,10 +75,58 @@ public class PersonalizedPlantService {
         PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
 
         personalizedPlant.setLastWatering(LocalDate.now());
-        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Water me!", ""));
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Water me! ", ""));
         personalizedPlant.setWateringNotificationSent(false);
 
         createPlantLog("Watering", personalizedPlant);
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void harvestPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastHarvestingSeeding(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Harvest me! ", ""));
+        personalizedPlant.setHarvestingSeedingNotificationSent(false);
+
+        createPlantLog("Harvesting seeds", personalizedPlant);
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void sunPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastSunExposure(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Expose me to sun! ", ""));
+        personalizedPlant.setSunExposureNotificationSent(false);
+
+        createPlantLog("Exposing to sun", personalizedPlant);
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void pruningPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastPruning(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Prun me! ", ""));
+        personalizedPlant.setPruningNotificationSent(false);
+
+        createPlantLog("Prunning", personalizedPlant);
+
+        personalizedPlantRepository.save(personalizedPlant);
+    }
+
+    public void cleanPlantById(Long Id) throws PlantNotFoundException {
+        PersonalizedPlant personalizedPlant = personalizedPlantRepository.findByPersonalizedPlantId(Id).orElseThrow(() -> new PlantNotFoundException("Plant cannot be found"));
+
+        personalizedPlant.setLastCleaningLeaves(LocalDate.now());
+        personalizedPlant.setMessage(personalizedPlant.getMessage().replaceAll("Clean me! ", ""));
+        personalizedPlant.setCleaningLeavesNotificationSent(false);
+
+        createPlantLog("Cleaning", personalizedPlant);
 
         personalizedPlantRepository.save(personalizedPlant);
     }

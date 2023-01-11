@@ -43,7 +43,7 @@
                 </table>
             </div>
             <div class="table-responsive">
-                <table class="table">
+                <table class="table" style="text-align: center">
 <!--                    <input type="hidden" th:field="*{}" />-->
                     <thead>
                         <tr>
@@ -62,8 +62,23 @@
                         </tr>
                         <tr>
                             <td>Last Watering</td>
-                            <td th:text="${personalizedPlant.getLastWatering()}">
-                            </td>
+                            <td th:text="${personalizedPlant.getLastWatering()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Sun Exposure</td>
+                            <td th:text="${personalizedPlant.lastSunExposure}"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Seed Harvesting</td>
+                            <td th:text="${personalizedPlant.lastHarvestingSeeding}"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Pruning</td>
+                            <td th:text="${personalizedPlant.lastPruning}"></td>
+                        </tr>
+                        <tr>
+                            <td>Last Cleaning Leaves</td>
+                            <td th:text="${personalizedPlant.lastCleaningLeaves}"></td>
                         </tr>
                         <tr>
                             <td>Last Fertilizing</td>
@@ -82,30 +97,64 @@
                             <td style="text-align: center;" >
                                 <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
                                 <a th:href="@{/personalizedplant/water(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
-                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                         Water
                                     </button>
                                 </a>
                             </td>
                             <td style="text-align: center;" >
                                 <a th:href="@{/personalizedplant/fertilizer(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
-                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                         Fertilizer
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/sun(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
+                                        Expose to sun
+                                    </button>
+                                </a>
+                            </td>
+                            <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/harvest(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
+                                        Harvest seeds
                                     </button>
                                 </a>
                             </td>
                         </tr>
                         <tr>
                             <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/pruning(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
+                                        Prun
+                                    </button>
+                                </a>
+                            </td>
+                            <td style="text-align: center;" >
+                                <a th:href="@{/personalizedplant/clean(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
+                                        Clean leaves
+                                    </button>
+                                </a>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align: center;" >
                                 <a th:href="@{/personalizedplant/pot(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
-                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                         Pot
                                     </button>
                                 </a>
                             </td>
                             <td style="text-align: center;" >
                                 <a th:href="@{/personalizedplant/soil(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
-                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                         Soil
                                     </button>
                                 </a>
@@ -114,14 +163,14 @@
                         <tr>
                             <td style="text-align: center;" >
                                 <!--                                <a th:href="@{/getById(PersonalizedPlantId=${yourPlant.getPersonalizedPlantId})}">-->
-                                <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                     Update
                                 </button>
                                 <!--                                </a>-->
                             </td>
                             <td style="text-align: center;" >
                                 <a th:href="@{/personalizedplant/delete(PersonalizedPlantId=${personalizedPlant.getPersonalizedPlantId})}">
-                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center; min-width: 170px" >
                                         Delete
                                     </button>
                                 </a>
