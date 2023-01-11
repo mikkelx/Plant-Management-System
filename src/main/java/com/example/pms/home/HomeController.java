@@ -1,5 +1,6 @@
 package com.example.pms.home;
 
+import com.example.pms.user.UserRole;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import com.example.pms.dto.PersonalizedPlantDto;
@@ -32,6 +33,10 @@ public class HomeController {
     @GetMapping
     public String getYoursPersolizedPlants(Model model) throws Exception{
         model.addAttribute("yourPlantsList", homeService.getYours2());
+
+        if(homeService.getCurrentUserRole() == UserRole.ADMIN)
+            return "userhomeAdmin";
+
         return "userhome";
     }
 
