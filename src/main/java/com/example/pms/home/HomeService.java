@@ -55,75 +55,78 @@ public class HomeService {
     }
 
     public String checkIfActionNeeded(List<PersonalizedPlant> personalizedPlantList) {
-        for(int i=0; i<personalizedPlantList.size(); i++) {
-            String message = "";
-            PersonalizedPlant personalizedPlant = personalizedPlantList.get(i);
+        if(personalizedPlantList.size()>0) {
+            for(int i=0; i<personalizedPlantList.size(); i++) {
+                String message = "";
+                PersonalizedPlant personalizedPlant = personalizedPlantList.get(i);
 
-            if(personalizedPlantList.get(i).needWatering()) {
-                message += "Water me! ";
-                if(!personalizedPlant.isWateringNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "watering");
-                    personalizedPlant.setWateringNotificationSent(true);
+                if(personalizedPlantList.get(i).needWatering()) {
+                    message += "Water me! ";
+                    if(!personalizedPlant.isWateringNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "watering");
+                        personalizedPlant.setWateringNotificationSent(true);
+                    }
                 }
-            }
-            if(personalizedPlantList.get(i).needSunExposure()) {
-                message += "Expose me to sun! ";
-                if(!personalizedPlant.isSunExposureNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "exposing to sun");
-                    personalizedPlant.setSunExposureNotificationSent(true);
+                if(personalizedPlantList.get(i).needSunExposure()) {
+                    message += "Expose me to sun! ";
+                    if(!personalizedPlant.isSunExposureNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "exposing to sun");
+                        personalizedPlant.setSunExposureNotificationSent(true);
+                    }
                 }
-            }
-            if(personalizedPlantList.get(i).needHarvesting()) {
-                message += "Harvest me! ";
-                if(!personalizedPlant.isHarvestingSeedingNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "seeds harvesting");
-                    personalizedPlant.setHarvestingSeedingNotificationSent(true);
+                if(personalizedPlantList.get(i).needHarvesting()) {
+                    message += "Harvest me! ";
+                    if(!personalizedPlant.isHarvestingSeedingNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "seeds harvesting");
+                        personalizedPlant.setHarvestingSeedingNotificationSent(true);
+                    }
                 }
-            }
-            if(personalizedPlantList.get(i).needPruning()) {
-                message += "Prun me! ";
-                if(!personalizedPlant.isPruningNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "pruning");
-                    personalizedPlant.setPruningNotificationSent(true);
+                if(personalizedPlantList.get(i).needPruning()) {
+                    message += "Prun me! ";
+                    if(!personalizedPlant.isPruningNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "pruning");
+                        personalizedPlant.setPruningNotificationSent(true);
+                    }
                 }
-            }
-            if(personalizedPlantList.get(i).needPruning()) {
-                message += "Clean me! ";
-                if(!personalizedPlant.isCleaningLeavesNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "cleaning");
-                    personalizedPlant.setCleaningLeavesNotificationSent(true);
-                }
-            }
-
-            if(personalizedPlantList.get(i).needFertilizing()) {
-                message += "Fertilize me! ";
-                if(!personalizedPlant.isFertilizerNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "fertilizing");
-                    personalizedPlant.setFertilizerNotificationSent(true);
+                if(personalizedPlantList.get(i).needPruning()) {
+                    message += "Clean me! ";
+                    if(!personalizedPlant.isCleaningLeavesNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "cleaning");
+                        personalizedPlant.setCleaningLeavesNotificationSent(true);
+                    }
                 }
 
-            }
+                if(personalizedPlantList.get(i).needFertilizing()) {
+                    message += "Fertilize me! ";
+                    if(!personalizedPlant.isFertilizerNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "fertilizing");
+                        personalizedPlant.setFertilizerNotificationSent(true);
+                    }
 
-            if(personalizedPlantList.get(i).needPotReplacement()) {
-                message += "Replace my pot! ";
-                if(!personalizedPlant.isPotNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "pot replacement");
-                    personalizedPlant.setPotNotificationSent(true);
                 }
 
-            }
+                if(personalizedPlantList.get(i).needPotReplacement()) {
+                    message += "Replace my pot! ";
+                    if(!personalizedPlant.isPotNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "pot replacement");
+                        personalizedPlant.setPotNotificationSent(true);
+                    }
 
-            if(personalizedPlantList.get(i).needSoilReplacement()) {
-                message += "Replace my soil! ";
-                if(!personalizedPlant.isSoilNotificationSent()) {
-                    this.sendReminder(personalizedPlant.getUserLabel(), "soil replacement");
-                    personalizedPlant.setSoilNotificationSent(true);
                 }
 
+                if(personalizedPlantList.get(i).needSoilReplacement()) {
+                    message += "Replace my soil! ";
+                    if(!personalizedPlant.isSoilNotificationSent()) {
+                        this.sendReminder(personalizedPlant.getUserLabel(), "soil replacement");
+                        personalizedPlant.setSoilNotificationSent(true);
+                    }
+
+                }
+                personalizedPlant.setMessage(message);
+                personalizedPlantRepository.save(personalizedPlant);
             }
-            personalizedPlant.setMessage(message);
-            personalizedPlantRepository.save(personalizedPlant);
         }
+
 
         return "";
     }

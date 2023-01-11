@@ -91,7 +91,7 @@ public class UserConfig {
                     "admin@gmail.com",
                     passwordEncoder.encode("haslo")
             );
-
+            user3.setEnabled(true);
             user3.setUserRole(UserRole.ADMIN);
 
             PersonalizedPlant personalizedPlant1 = new PersonalizedPlant(
