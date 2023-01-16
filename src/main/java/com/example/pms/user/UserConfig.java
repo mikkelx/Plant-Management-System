@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
 public class UserConfig {
     private final PasswordEncoder passwordEncoder;
