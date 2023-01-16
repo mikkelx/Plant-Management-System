@@ -54,7 +54,7 @@
                             <tr/>
                             <tr>
                                 <td>
-                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <p class="text-muted">Set sun exposure for this plant</p>
                                     <select style="text-align: center" class="form-control" id="sundropDownList" th:field="*{sunExposureTimeStampInDays}">
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
@@ -63,7 +63,7 @@
                             <tr/>
                             <tr>
                                 <td>
-                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <p class="text-muted">Set seed harvesting timestamp for this plant</p>
                                     <select style="text-align: center" class="form-control" id="harvestdropDownList" th:field="*{harvestingSeedingTimestampInDays}">
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
@@ -72,7 +72,7 @@
                             <tr/>
                             <tr>
                                 <td>
-                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <p class="text-muted">Set pruning timestamp for this plant</p>
                                     <select style="text-align: center" class="form-control" id="pruningdropDownList" th:field="*{pruningTimestampInDays}">
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
@@ -81,7 +81,7 @@
                             <tr/>
                             <tr>
                                 <td>
-                                    <p class="text-muted">Set watering timestamp for this plant</p>
+                                    <p class="text-muted">Set cleaning timestamp for this plant</p>
                                     <select style="text-align: center" class="form-control" id="cleaningdropDownList" th:field="*{cleaningLeavesTimestampInDays}">
                                         <option th:each="day : ${days}" th:value="${day}" th:text="${day} + ' days'"></option>
                                     </select>
