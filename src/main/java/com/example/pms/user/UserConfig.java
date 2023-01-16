@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.util.List;
 
-//@Configuration
+@Configuration
 @RequiredArgsConstructor
 public class UserConfig {
     private final PasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class UserConfig {
 
             SoilType peatSoil = new SoilType(
                     "Peat Soil",
-                    20
+                    30
             );
 
             SoilType humusSoil = new SoilType(
@@ -41,7 +41,7 @@ public class UserConfig {
 
             SoilType sandySoil = new SoilType(
                     "Sandy Soil",
-                    20
+                    30
             );
 
             SoilType claySoil = new SoilType(
@@ -102,7 +102,7 @@ public class UserConfig {
             PersonalizedPlant personalizedPlant1 = new PersonalizedPlant(
                     user1,
                     plant,
-                    "Kwiatek w kuchni"
+                    "Kwiatek w korytarzu"
             );
 
             PersonalizedPlant personalizedPlant2 = new PersonalizedPlant(
@@ -115,7 +115,7 @@ public class UserConfig {
             user1.addPlant(personalizedPlant2);
 
             soilRepository.saveAll(
-                    List.of(peatSoil, humusSoil));
+                    List.of(peatSoil, humusSoil, sandySoil, claySoil));
 
             flowerPotRepository.saveAll(
                     List.of(flowerPot)
