@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.util.List;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
 public class UserConfig {
     private final PasswordEncoder passwordEncoder;
@@ -39,13 +39,23 @@ public class UserConfig {
                     30
             );
 
-            FertilizerType fertilizerType = new FertilizerType(
-                    "fertilizerType",
+            SoilType sandySoil = new SoilType(
+                    "Sandy Soil",
                     20
             );
 
+            SoilType claySoil = new SoilType(
+                    "Clay Soil",
+                    30
+            );
+
+            FertilizerType fertilizerType = new FertilizerType(
+                    "Basic fertilizer",
+                    14
+            );
+
             FlowerPot flowerPot = new FlowerPot(
-                    "FlowerPot Type",
+                    "Classic Type",
                     20
             );
 
@@ -80,11 +90,6 @@ public class UserConfig {
             );
             user1.setEnabled(true);
 
-            User user2 = new User(
-                    "login2",
-                    "mail2@gmail.com",
-                    passwordEncoder.encode("haslo")
-            );
 
             User user3 = new User(
                     "admin",
@@ -124,7 +129,7 @@ public class UserConfig {
                     List.of(plant, plant1));
 
             userRepository.saveAll(
-                    List.of(user1, user2, user3));
+                    List.of(user1, user3));
 
 
             PersonalizedPlantRepository.saveAll(

@@ -1,6 +1,7 @@
 package com.example.pms.user;
 
 import com.example.pms.personalizedPlant.PersonalizedPlant;
+import com.example.pms.userLog.UserLog;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -43,6 +44,27 @@ public class UserController {
         }
 
         return "redirect:/user";
+    }
+
+    @GetMapping("/logs")
+    public String getLogs(@RequestParam("userId") Long userId,
+                         Model model) throws Exception{
+
+        if(userId == userService.getCurrentUserId()) {
+            model.addAttribute("errorMessage", "You cannot see admin logs!");
+            model.addAttribute("usersList", userService.getUsersList());
+            return "displayUsersAdmin";
+        }
+        try {
+            List<UserLog> userLogList = userService.getUserLogs(userId);
+            model.addAttribute("userLogList", userLogList);
+            return "userLogs";
+
+        } catch (Exception exception) {
+            String exceptionMessage = exception.getMessage();
+            model.addAttribute("exceptionMessage", exceptionMessage);
+            return "error";
+        }
     }
 
 

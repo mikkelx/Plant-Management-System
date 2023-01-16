@@ -61,4 +61,8 @@ public class UserService implements UserDetailsService {
     public void deleteById(Long userId) {
         userRepository.deleteById(userId);
     }
+
+    public List<UserLog> getUserLogs(Long userId) {
+        return userLogRepository.findByUserUserId(userId);
+    }
 }

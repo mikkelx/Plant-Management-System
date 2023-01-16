@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>Plant History</title>
+    <link rel="stylesheet" th:href="@{/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800&amp;display=swap">
+</head>
+
+<body>
+    <nav class="navbar navbar-light navbar-expand-md fixed-top navbar-shrink py-3" id="mainNav">
+        <div class="container"><a class="navbar-brand d-flex align-items-center" href="/"><span>BloomBoost</span></a><button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="navcol-1">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" th:href="@{/plant}">Plants</a></li>
+                </ul>
+                <form th:action="@{/logout}" method="post">
+                    <input  type="submit" value="Logout" class="btn btn-primary shadow" role="button">
+                </form>
+            </div>
+        </div>
+    </nav>
+    <section class="py-5 mt-5">
+        <div class="container py-4 py-xl-5" style="width: 477px; text-align: center">
+
+            <div class="table-responsive">
+                <table class="table">
+<!--                    <input type="hidden" th:field="*{}" />-->
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Date</th>
+                            <th>Log</th>
+                        </tr>
+                    </thead>
+                    <tbody th:each="log : ${userLogList}">
+                        <tr>
+                            <td style="text-align: center;" th:text="${log.getUserLogId()}"> </td>
+                            <td style="text-align: center;" th:text="${log.getDate()}"> </td>
+                            <td style="text-align: center;" th:text="${log.getLogData()}"> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <footer>
+
+    </footer>
+    <script th:src="@{/bootstrap/js/bootstrap.min.js}"></script>
+    <script th:src="@{/js/startup-modern.js}"></script>
+</body>
+
+</html>
