@@ -5,6 +5,7 @@ import com.example.pms.dto.RegisterPersonalizedPlant;
 import com.example.pms.dto.RegisterPlant;
 import com.example.pms.exceptions.PlantNotFoundException;
 import com.example.pms.personalizedPlant.PersonalizedPlant;
+import com.example.pms.personalizedPlant.PersonalizedPlantRepository;
 import com.example.pms.plantProperties.*;
 import com.example.pms.user.User;
 import com.example.pms.user.UserService;
@@ -27,6 +28,7 @@ public class PlantService {
 
     private final UserService userService;
     private final PlantRepository plantRepository;
+    private final PersonalizedPlantRepository personalizedPlantRepository;
     private final SoilRepository soilRepository;
     private final FertilizerTypeRepository fertilizerTypeRepository;
     private final FlowerPotRepository flowerPotRepository;
@@ -44,6 +46,10 @@ public class PlantService {
         Plant plant = new Plant();
         plant.setPlantName(registerPlant.getPlantName());
         plant.setWateringTimestampInDays(registerPlant.getWateringTimestampInDays());
+        plant.setSunExposureTimeStampInDays(registerPlant.getSunExposureTimeStampInDays());
+        plant.setHarvestingSeedingTimestampInDays(registerPlant.getHarvestingSeedingTimestampInDays());
+        plant.setPruningTimestampInDays(registerPlant.getPruningTimestampInDays());
+        plant.setCleaningLeavesTimestampInDays(registerPlant.getCleaningLeavesTimestampInDays());
         plant.setSoilType(soilRepository.findBySoilName(registerPlant.getSoilTypeName()));
         plant.setFertilizerType(fertilizerTypeRepository.findByFertilizerName(registerPlant.getFertilizerTypeName()));
         plant.setFlowerPot(flowerPotRepository.findByPotSize(registerPlant.getFlowerPotName()));
@@ -54,13 +60,15 @@ public class PlantService {
         userService.createLog("Added new system plant: " + registerPlant.getPlantName(), user);
         this.createTechnicalLog("Admin with ID: " + user.getUserId() + " added new system plant with name: " + registerPlant.getPlantName());
 
-
         return bindingResult;
     }
 
     @Transactional
     public void delete(String plantName) throws Exception {
-        plantRepository.deleteByPlantName(plantName);
+        Plant plant = plantRepository.findByPlantName(plantName).orElseThrow(()->new PlantNotFoundException("Plant not found!"));
+//        Long plantId = plantRepository.deleteByPlantName(plantName);
+        personalizedPlantRepository.deleteByPlantPlantId(plant.getPlantId());
+        plantRepository.delete(plant);
     }
 
     public void createTechnicalLog(String log) {

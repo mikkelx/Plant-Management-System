@@ -24,12 +24,17 @@ public class Plant {
     private String plantName;
     @NotNull
     private int wateringTimestampInDays;
+    @NotNull
+    private int sunExposureTimeStampInDays;
+    @NotNull
+    private int harvestingSeedingTimestampInDays;
+    @NotNull
+    private int pruningTimestampInDays;
+    @NotNull
+    private int cleaningLeavesTimestampInDays;
 
-//    @OneToMany(mappedBy = "plant",
-//            orphanRemoval = true,
-//            cascade = CascadeType.ALL)
-//    private Set<PersonalizedPlant> personalizedPlants = new HashSet<>();
 
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "soilId")
     private SoilType soilType;
@@ -42,9 +47,25 @@ public class Plant {
     @JoinColumn(name = "potId")
     private FlowerPot flowerPot;
 
-    public Plant(String plantName, int wateringTimestampInDays, SoilType soilType, FertilizerType fertilizerType, FlowerPot flowerPot) {
+
+//    public Plant(String plantName, int wateringTimestampInDays, SoilType soilType, FertilizerType fertilizerType, FlowerPot flowerPot) {
+//        this.plantName = plantName;
+//        this.wateringTimestampInDays = wateringTimestampInDays;
+//        this.soilType = soilType;
+//        this.fertilizerType = fertilizerType;
+//        this.flowerPot = flowerPot;
+//    }
+
+
+    public Plant( String plantName, int wateringTimestampInDays, int sunExposureTimeStampInDays,int harvestingSeedingTimestampInDays,
+                  int pruningTimestampInDays, int cleaningLeavesTimestampInDays, SoilType soilType,
+                  FertilizerType fertilizerType, FlowerPot flowerPot) {
         this.plantName = plantName;
         this.wateringTimestampInDays = wateringTimestampInDays;
+        this.sunExposureTimeStampInDays = sunExposureTimeStampInDays;
+        this.harvestingSeedingTimestampInDays = harvestingSeedingTimestampInDays;
+        this.pruningTimestampInDays = pruningTimestampInDays;
+        this.cleaningLeavesTimestampInDays = cleaningLeavesTimestampInDays;
         this.soilType = soilType;
         this.fertilizerType = fertilizerType;
         this.flowerPot = flowerPot;

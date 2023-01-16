@@ -13,5 +13,4 @@ public interface PlantRepository extends JpaRepository<Plant, Long> {
     Boolean existsPlantsByPlantName(String plantName);
     Long deleteByPlantName(String plantName);
 
-
 }

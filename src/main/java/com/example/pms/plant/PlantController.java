@@ -97,7 +97,7 @@ public class PlantController {
 
     private Model loadAddingForm(Model model, RegisterPlant registerPlant) {
         List<Integer> daysList = List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-                15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30);
+                15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 60, 90);
 
         model.addAttribute("registerPlant", registerPlant);
         model.addAttribute("soilTypeList", plantService.getSoilTypesList());
@@ -117,30 +117,22 @@ public class PlantController {
 //                .status(HttpStatus.OK)
 //                .body(plantService.getAll());
 //    }
-
-    @GetMapping("/classic")
-    public ResponseEntity<List<Plant>> getAll() throws Exception{
-        ResponseEntity<List<Plant>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(plantService.getAll());
-    }
-
-    @GetMapping("/dto")
-    public ResponseEntity<List<PlantDto>> getAllDto() throws Exception{
-        ResponseEntity<List<PlantDto>> r = new ResponseEntity<>(plantService.getAllDto(), HttpStatus.OK);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(plantService.getAllDto());
-    }
-
-
-
-    //TODO - add access only for admin
-    @PostMapping("/addNewPlant")
-    public void addNewPlantToDB(@RequestBody Plant plant) {
-        plantService.addNewPlantToDB(plant);
-    }
+//
+//    @GetMapping("/classic")
+//    public ResponseEntity<List<Plant>> getAll() throws Exception{
+//        ResponseEntity<List<Plant>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(plantService.getAll());
+//    }
+//
+//    @GetMapping("/dto")
+//    public ResponseEntity<List<PlantDto>> getAllDto() throws Exception{
+//        ResponseEntity<List<PlantDto>> r = new ResponseEntity<>(plantService.getAllDto(), HttpStatus.OK);
+//        return ResponseEntity
+//                .status(HttpStatus.OK)
+//                .body(plantService.getAllDto());
+//    }
 
 
 }

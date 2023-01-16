@@ -51,7 +51,11 @@ public class UserConfig {
 
             Plant plant = new Plant(
                     "Storczyk",
-                    7,
+                    1,
+                    2,
+                    3,
+                    4,
+                    5,
                     humusSoil,
                     fertilizerType,
                     flowerPot
@@ -60,6 +64,10 @@ public class UserConfig {
             Plant plant1 = new Plant(
                     "Dracena Deremeńska",
                     2,
+                    3,
+                    4,
+                    5,
+                    6,
                     peatSoil,
                     fertilizerType,
                     flowerPot
@@ -68,22 +76,22 @@ public class UserConfig {
             User user1 = new User(
                     "login1",
                     "mail1@gmail.com",
-                    passwordEncoder.encode("haslo1")
+                    passwordEncoder.encode("haslo")
             );
             user1.setEnabled(true);
 
             User user2 = new User(
                     "login2",
                     "mail2@gmail.com",
-                    passwordEncoder.encode("haslo2")
+                    passwordEncoder.encode("haslo")
             );
 
             User user3 = new User(
                     "admin",
                     "admin@gmail.com",
-                    passwordEncoder.encode("admin")
+                    passwordEncoder.encode("haslo")
             );
-
+            user3.setEnabled(true);
             user3.setUserRole(UserRole.ADMIN);
 
             PersonalizedPlant personalizedPlant1 = new PersonalizedPlant(

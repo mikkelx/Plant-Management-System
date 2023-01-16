@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 @Data
@@ -19,14 +20,14 @@ public class RegisterPersonalizedPlant {
     private String userLabel;
     @Pattern(regexp = "^[^0]+$", message="Plant must be choosen!")
     private String plantName;
-//    @Pattern(regexp = "^[^0]+$", message = "Choose last watering! If not performed choose 0")
     @NotNull(message = "Choose last watering! If not performed choose 0")
     private int lastWatering;
-//    @Pattern(regexp = "^[^0]+$", message = "Choose last fertilizing! If not performed choose 0")
+    private int lastSunExposure;
+    private int lastHarvestingSeeding;
+    private int lastPruning;
+    private int lastCleaningLeaves;
     private int lastFertilizing;
-//    @Pattern(regexp = "^[^0]+$", message = "Choose last pot replacement! If not performed choose 0")
     private int lastPotReplacement;
-//    @Pattern(regexp = "^[^0]+$", message = "Choose last soil replacement! If not performed choose 0")
     private int lastSoilReplacement;
 
 

@@ -26,7 +26,6 @@ public class SecurityConfig {
         http.authorizeRequests(authorization -> authorization
                         .requestMatchers("/auth/**").permitAll()
                                 .requestMatchers("/personalizedplant/**").hasAnyAuthority("USER", "ADMIN")
-                                .requestMatchers("/user").hasAnyAuthority("ADMIN")
                                 .requestMatchers("/user/**").hasAnyAuthority("ADMIN")
 
 //                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
