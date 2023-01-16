@@ -45,5 +45,15 @@ public class UserLog {
         this.user = user;
     }
 
+    public Long getUserLogId() {
+        return userLogId;
+    }
 
+    public String getLogData() {
+        return logData;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
 }

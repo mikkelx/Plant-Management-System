@@ -51,6 +51,13 @@
                             <td style="text-align: center;" th:text="${user.enabled}">
 
                             <td style="text-align: center;" >
+                                <a th:href="@{/user/logs(userId=${user.userId})}">
+                                    <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
+                                        Logs
+                                    </button>
+                                </a>
+                            </td>
+                            <td style="text-align: center;" >
                                 <a th:href="@{/user/delete(userId=${user.userId})}">
                                     <button  class="btn btn-primary text-center" type="button" style="text-align: center;" >
                                         Delete
