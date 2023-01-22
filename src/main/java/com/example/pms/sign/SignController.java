@@ -101,17 +101,6 @@ public class SignController {
             return "signup";
         }
 
-//        try {
-//            signService.signup(registerRequest, bindingResult);
-//            if(bindingResult.hasErrors()) {
-//                return "signup";
-//            }
-//        } catch (Exception exception) {
-//            String exceptionMessage = exception.getMessage();
-//            model.addAttribute("exceptionMessage", exceptionMessage);
-//            return "error";
-//        }
-
         model.addAttribute("exceptionMessage", "Activation link was sent to your email!");
         return "error";
     }
@@ -127,25 +116,6 @@ public class SignController {
         model.addAttribute("exceptionMessage", "Account activated successfully");
         return "error";
     }
-
-
-
-
-    //TODO - rename mapping
-//    @PostMapping("/signup")
-//    public ResponseEntity<String> signup(@RequestBody RegisterRequest registerRequest) {
-//        signService.signup(registerRequest);
-//        return new ResponseEntity<>("User registartion successfull - activation link sent to your email!", HttpStatus.OK);
-//    }
-
-//    @GetMapping("/accountVerification/{token}")
-//    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
-//        signService.verifyAccount(token);
-//        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
-//    }
-
-
-
 
 
 }

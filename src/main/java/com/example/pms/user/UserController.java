@@ -67,28 +67,4 @@ public class UserController {
         }
     }
 
-
-//    @GetMapping
-//    public List<User> getUsersList() {
-//        return userService.getUsersList();
-//    }
-//
-//    @PostMapping
-//    public void addNewUserToDB(@RequestBody User user) {
-//        userService.addNewUserToDB(user);
-//    }
-
-    //TODO
-//    @PostMapping("/passchange")
-//    public ResponseEntity<String> changePassword(@RequestBody String email) {
-//
-//        return new ResponseEntity<>("Link to change your password was sent!", HttpStatus.OK);
-//    }
-//
-//    @GetMapping("/passchange/{token}")
-//    public ResponseEntity<String> verifyAccount(@PathVariable String token) {
-//        authService.verifyAccount(token);
-//        return new ResponseEntity<>("Account activated successfully", HttpStatus.OK);
-//    }
-
 }

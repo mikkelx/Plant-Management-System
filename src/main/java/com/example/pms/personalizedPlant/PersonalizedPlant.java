@@ -47,12 +47,7 @@ public class PersonalizedPlant {
     @JoinColumn(name = "plantId")
     private Plant plant;
 
-//    public PersonalizedPlant() {
-//        this.user = user;
-//        this.plant = plant;
-//        this.userLabel = userLabel;
-//        this.lastWatering = lastWatering;
-//    }
+
 
 
     public PersonalizedPlant(User user, Plant plant, String userLabel, LocalDate lastWatering,

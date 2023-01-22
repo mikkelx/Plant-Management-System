@@ -20,7 +20,6 @@ public class RegisterPersonalizedPlant {
     private String userLabel;
     @Pattern(regexp = "^[^0]+$", message="Plant must be choosen!")
     private String plantName;
-    @NotNull(message = "Choose last watering! If not performed choose 0")
     private int lastWatering;
     private int lastSunExposure;
     private int lastHarvestingSeeding;

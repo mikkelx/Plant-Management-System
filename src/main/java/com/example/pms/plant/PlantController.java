@@ -109,30 +109,4 @@ public class PlantController {
 
 
 
-
-//    @GetMapping
-//    public ResponseEntity<List<Plant>> getAll() throws Exception{
-//        ResponseEntity<List<Plant>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(plantService.getAll());
-//    }
-//
-//    @GetMapping("/classic")
-//    public ResponseEntity<List<Plant>> getAll() throws Exception{
-//        ResponseEntity<List<Plant>> r = new ResponseEntity<>(plantService.getAll(), HttpStatus.OK);
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(plantService.getAll());
-//    }
-//
-//    @GetMapping("/dto")
-//    public ResponseEntity<List<PlantDto>> getAllDto() throws Exception{
-//        ResponseEntity<List<PlantDto>> r = new ResponseEntity<>(plantService.getAllDto(), HttpStatus.OK);
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(plantService.getAllDto());
-//    }
-
-
 }

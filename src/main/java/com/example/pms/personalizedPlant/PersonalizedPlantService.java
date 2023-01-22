@@ -179,15 +179,6 @@ public class PersonalizedPlantService {
         return personalizedPlantDto;
     }
 
-//    //TODO - to delete - user have access only to his plants
-    @Transactional
-    public List<PersonalizedPlantDto> getAll() {
-        return personalizedPlantRepository.findAll()
-                .stream()
-                .map(this::mapToDto)
-                .collect(Collectors.toList());
-    }
-
     private PersonalizedPlantDto mapToDto(PersonalizedPlant personalizedPlant) {
         System.out.println(personalizedPlant.getPlant());
         return PersonalizedPlantDto.builder()

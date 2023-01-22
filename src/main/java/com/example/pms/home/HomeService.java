@@ -140,29 +140,4 @@ public class HomeService {
                 ("Your plant need action! Your plant named: " + plantLabel + " need " + action)));
     }
 
-
-
-//    @Transactional
-//    public List<PersonalizedPlantDto> getYours() throws PlantNotFoundException {
-//        User user = this.getCurrentUser();
-//        Long userId = user.getUserId();
-//        //List<PersonalizedPlant> list = personalizedPlantRepository.findAll();//.orElseThrow(() -> new PlantNotFoundException("Cannot find any plant!"));
-//        return personalizedPlantRepository.findByUserUserId(userId).orElseThrow(() -> new PlantNotFoundException("Cannot find any plant!"))
-//                .stream()
-//                .map(this::mapToDto)
-//                .collect(Collectors.toList());
-//    }
-
-//
-//    private PersonalizedPlantDto mapToDto(PersonalizedPlant personalizedPlant) {
-//        System.out.println(personalizedPlant.getPlant());
-//        return PersonalizedPlantDto.builder()
-//                .userLabel(personalizedPlant.getUserLabel())
-//                .Id(personalizedPlant.getPersonalizedPlantId())
-//                .lastWatering(personalizedPlant.getLastWatering())
-//                .lastFertilizing(personalizedPlant.getLastFertilizing())
-//                .lastPotReplacement(personalizedPlant.getLastPotReplacement())
-//                .plant(personalizedPlant.getPlant())
-//                .build();
-//    }
 }

@@ -17,19 +17,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        String[] staticResources  =  {
-                "/css/**",
-                "/scripts/**",
-                "/assets/**"
-        };
 
         http.authorizeRequests(authorization -> authorization
                         .requestMatchers("/auth/**").permitAll()
-                                .requestMatchers("/personalizedplant/**").hasAnyAuthority("USER", "ADMIN")
-                                .requestMatchers("/user/**").hasAnyAuthority("ADMIN")
-
-//                        .requestMatchers("/personalizedplant/all").hasAuthority("ADMIN")
-//                        .requestMatchers("/*").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/personalizedplant/**").hasAnyAuthority("USER", "ADMIN")
+                        .requestMatchers("/user/**").hasAnyAuthority("ADMIN")
                         .requestMatchers("/bootstrap/**",
                                 "/css/**",
                                 "/img/**",

@@ -23,13 +23,6 @@ import java.util.List;
 public class HomeController {
     private final HomeService homeService;
 
-//    @GetMapping
-//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(homeService.getYours());
-//    }
-
     @GetMapping
     public String getYoursPersolizedPlants(Model model) throws Exception{
         model.addAttribute("yourPlantsList", homeService.getYours2());
@@ -47,23 +40,6 @@ public class HomeController {
         return "personalizedPlant";
     }
 
-
-
-
-
-//    @GetMapping("getById")
-//    public String getPlantById1(@RequestParam("PersonalizedPlantId") Long Id, Model model) throws Exception{
-//        PersonalizedPlant personalizedPlant = homeService.getPlantById(Id);
-//        model.addAttribute("personalizedPlant", personalizedPlant);
-//        return "personalizedPlant";
-//    }
-
-//    @GetMapping("/demo2")
-//    public String demo2(org.springframework.ui.Model model) {
-//        model.addAttribute("theDate", LocalDate.now());
-//
-//        return "product";
-//    }
 
 
 }

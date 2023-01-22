@@ -15,7 +15,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import java.time.LocalDate;
 import java.util.List;
 
-@Configuration
+//@Configuration
 @RequiredArgsConstructor
 public class UserConfig {
     private final PasswordEncoder passwordEncoder;
@@ -83,6 +83,42 @@ public class UserConfig {
                     flowerPot
             );
 
+            Plant plant4 = new Plant(
+                    "Monstera",
+                    7,
+                    2,
+                    90,
+                    90,
+                    7,
+                    peatSoil,
+                    fertilizerType,
+                    flowerPot
+            );
+
+            Plant plant3 = new Plant(
+                    "Sansewieria",
+                    5,
+                    1,
+                    90,
+                    60,
+                    7,
+                    claySoil,
+                    fertilizerType,
+                    flowerPot
+            );
+
+            Plant plant5 = new Plant(
+                    "Pilea",
+                    7,
+                    1,
+                    60,
+                    30,
+                    7,
+                    claySoil,
+                    fertilizerType,
+                    flowerPot
+            );
+
             User user1 = new User(
                     "login1",
                     "mail1@gmail.com",
@@ -126,7 +162,7 @@ public class UserConfig {
             );
 
             plantRepository.saveAll(
-                    List.of(plant, plant1));
+                    List.of(plant, plant1, plant3, plant4, plant5));
 
             userRepository.saveAll(
                     List.of(user1, user3));

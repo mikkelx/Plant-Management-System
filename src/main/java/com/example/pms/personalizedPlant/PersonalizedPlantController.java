@@ -201,43 +201,5 @@ public class PersonalizedPlantController {
     }
 
 
-    //    @GetMapping
-//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(personalizedPlantService.getYours());
-//    }
-//
-
-//    @PostMapping
-//    public ResponseEntity<PersonalizedPlantDto> createPresonalizedPlant(@RequestBody PersonalizedPlantDto personalizedPlantDto) {
-//        return ResponseEntity
-//                .status(HttpStatus.CREATED)
-//                .body(personalizedPlantService.saveDto(personalizedPlantDto));
-//    }
-
-
-    //submitting new plant
-//    @PostMapping("/submitPersonalizedPlantForm")
-//    public String submitPersonalizedPlantForm(PersonalizedPlantDto personalizedPlantDto) {
-//        System.out.println(personalizedPlantDto.getUserLabel());
-//
-//        return "userhome";
-//    }
-
-//    @GetMapping
-//    public ResponseEntity<List<PersonalizedPlantDto>> getYoursPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(personalizedPlantService.getYours());
-//    }
-
-//    @GetMapping("/all")
-//    public ResponseEntity<List<PersonalizedPlantDto>> getAllPersolizedPlants() throws Exception{
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(personalizedPlantService.getYours());
-//    }
-
 
 }

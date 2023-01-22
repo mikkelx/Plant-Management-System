@@ -48,15 +48,6 @@ public class Plant {
     private FlowerPot flowerPot;
 
 
-//    public Plant(String plantName, int wateringTimestampInDays, SoilType soilType, FertilizerType fertilizerType, FlowerPot flowerPot) {
-//        this.plantName = plantName;
-//        this.wateringTimestampInDays = wateringTimestampInDays;
-//        this.soilType = soilType;
-//        this.fertilizerType = fertilizerType;
-//        this.flowerPot = flowerPot;
-//    }
-
-
     public Plant( String plantName, int wateringTimestampInDays, int sunExposureTimeStampInDays,int harvestingSeedingTimestampInDays,
                   int pruningTimestampInDays, int cleaningLeavesTimestampInDays, SoilType soilType,
                   FertilizerType fertilizerType, FlowerPot flowerPot) {

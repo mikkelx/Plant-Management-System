@@ -9,6 +9,8 @@ import com.example.pms.user.UserRole;
 import com.example.pms.user.UserService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
@@ -111,4 +113,13 @@ public class SignService {
         }
         throw new ActivationException("Passwords are not matching!");
     }
+
+    public boolean isAlreadyLogged() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if(!authentication.getPrincipal().equals("anonymousUser"))
+            return true;
+
+        return false;
+    }
+
 }
